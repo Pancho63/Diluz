@@ -1277,10 +1277,10 @@ void Worker::castModeSelect()
         ui->labelIpT->setVisible(true);
         ui->refresh->setVisible(true);
         ui->iPTeleco->setVisible(true);
-        ui->line1->setVisible(true);
+        ui->cadre1->setVisible(true);
         ui->labelIPDl->setVisible(true);
         ui->iPDLight->setVisible(true);
-        ui->line2->setVisible(true);
+        ui->cadre2->setVisible(true);
         multiCastOn = false;
         ui->castButton->setText("Mode = UniCast");
 
@@ -1291,10 +1291,10 @@ void Worker::castModeSelect()
         ui->labelIpT->setVisible(false);
         ui->refresh->setVisible(false);
         ui->iPTeleco->setVisible(false);
-        ui->line1->setVisible(false);
+        ui->cadre1->setVisible(false);
         ui->labelIPDl->setVisible(false);
         ui->iPDLight->setVisible(false);
-        ui->line2->setVisible(false);
+        ui->cadre2->setVisible(false);
         multiCastOn = true;
         ui->castButton->setText("Mode = Multicast");
         IpSend = groupAddress;
