@@ -1,0 +1,70 @@
+QWidget
+{ background-color : black; color : white;
+border-color : black;
+border-style: outset;
+border-width: 1px;
+border-radius: 5px;}
+
+QTabWidget
+{ background-color : black; color : white;
+border-radius: 5px;
+border-color : white;
+border-style: outset;
+border-width: 0px;}
+
+QPushButton{
+border-color : white;
+height: 50px;
+}
+
+QPushButton:pressed{ background-color: grey; border: none;}
+QPushButton:disabled{color: grey;  border: grey;}
+
+QSlider::sub-page:disabled{background: black; border: grey;}
+QSlider::groove:disabled{background: black; border: grey;}
+
+QLabel {background: transparent;
+border-color : transparent}
+
+
+QLineEdit{border: 1px outset grey;
+font-size: 18pt;}
+
+QLineEdit::disabled {color:grey;}
+
+QComboBox {
+font-size: 18pt;
+color: white;
+background-color : grey;
+    border: 1px outset gray;
+    border-radius: 3px;
+    padding: 1px 10px 1px 3px;
+    min-width: 4em;
+}
+
+QComboBox:on { /* shift the text when the popup opens */
+color: white;
+background-color : grey;
+    padding-top: 3px;
+    padding-left: 4px;
+}
+/* QComboBox gets the "on" state when the popup is open */
+QComboBox:!editable:on, QComboBox::drop-down:editable:on {
+    color: white;
+}
+
+QComboBox::drop-down {border-width: 0px;
+color: white;
+}
+
+QComboBox::down-arrow {image: url(noimg); border-width: 0px;}
+
+QComboBox QAbstractItemView {
+color: white;
+background-color : grey;
+border: 2px outset lightgray;
+}
+
+QTextEdit {font: bold;font-size: 18pt;background-color :transparent;}
+
+
