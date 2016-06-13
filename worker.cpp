@@ -1120,7 +1120,7 @@ void Worker::errorINPatch(int ok)
     ui->p9->setEnabled(vrai);
     ui->nChannel->setEnabled(vrai);
     ui->nDimmer->setEnabled(vrai);
-    ui->line3->setEnabled(vrai);
+    ui->line->setEnabled(vrai);
 
     ui->yes_2->setEnabled(faux);
     ui->no_2->setEnabled(faux);
