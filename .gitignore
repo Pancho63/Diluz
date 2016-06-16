@@ -1,2 +1,18 @@
 
 oscosc.pro.user
+
+android/AndroidManifest.xml
+
+android/build.gradle
+
+android/gradle/wrapper/gradle-wrapper.jar
+
+android/gradle/wrapper/gradle-wrapper.properties
+
+android/gradlew
+
+android/gradlew.bat
+
+android/res/drawable-hdpi/icon.png
+
+android/res/values/libs.xml
