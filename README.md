@@ -5,7 +5,7 @@ OSC Remote for D::Light lighting console (www.getdlight.com)
 
 # Installation sur iOS depuis un Mac
 
-Les versions moderne d'iOS et Xcode propose une technique appelée Sideloading qui vous permet d'installer des apps et software sur vos iPhone, iPad ou iPod touch directemment depuis Xcode sur un Mac, sans devoir passer par l'App Store. Nous utiliserons cette méthode pour installer Diluz sur votre iOS device.
+Les versions modernes d'iOS et Xcode proposent une technique appelée Sideloading qui vous permet d'installer des apps et software sur vos iPhone, iPad ou iPod touch directement depuis Xcode sur un Mac, sans devoir passer par l'App Store. Nous utiliserons cette méthode pour installer Diluz sur votre iOS device.
 
 Le code de Diluz a été crée sur QT Creator. Il vous faudra télécharger ce software afin de générer un projet Xcode.
 
@@ -36,9 +36,9 @@ La marche à suivre pourrait se résumer à :
 2. Télécharger Xcode et l'installer
 3. Ouvrir Xcode et dans Préférence / Account, cliquer sur le bouton + pour y ajouter votre Apple ID
 4. Ouvrir le fichier oscosc.pro dans QT Creator
-5. Dans la fenêtre Configure Project : sélectionner "iphoneos-clang Qt 5.6.0 for iOS "uniquement et cliquer sur "Configure project"
+5. Dans la fenêtre Configure Project : sélectionner "iphoneos-clang Qt 5.6.0 for iOS" uniquement et cliquer sur "Configure project"
 6. Cliquer sur l'icone "Marteau" soit "Build Project" tout en bas de la colone de gauche
-7. QT Creator aura alors créé un dossier contenant le fichier Xcode DiLuz.xcodeproj. Ce dossier est par defaut généré dans le dossier précédent dans l'arborescence de vos fichier.
+7. QT Creator aura alors créé un dossier contenant le fichier Xcode DiLuz.xcodeproj. Ce dossier est par defaut généré dans le dossier précédent dans l'arborescence de vos fichiers.
 8. Ouvrir le fichier DiLuz.xcodeproj
 9. Sélectionner le projet Xcode à sideloader dans la barre latérale de gauche
 10. Allez dans General / Identity et changer le Bundle Identfier. Vous pouvez simplement ajouter "123" à la fin du nom.
