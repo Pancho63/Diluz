@@ -51,3 +51,4 @@ La marche à suivre pourrait se résumer à :
 17. Une fois terminé vous pouvez démarer Diluz sur votre iDevice
 
 enjoy
+(merci à Aroom pour ce howto)
