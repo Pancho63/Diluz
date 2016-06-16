@@ -334,10 +334,13 @@ magicSlider->setValue(50);
 magicSlider->setEnabled(false);
 magicSlider->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 magicSlider->setFixedWidth(screenWidth/6.5);
-magicSlider->setFixedHeight(screenHeight/2);
 magicSlider->setStyleSheet("QSlider::groove:disabled   { border: 1px outset indigo; background: indigo; border-radius: 4px;}"
                            "QSlider::sub-page:disabled { border: 1px outset indigo; background: indigo; border-radius: 4px;}"
                            "QSlider::handle:disabled   { border: 3px outset fuchsia;border-radius: 10px; background: transparent;color : fushia;}");
+
+QVBoxLayout *magS = new QVBoxLayout(magicSliderT);
+magS->setContentsMargins(0,0,0,0);
+magS->addWidget(magicSlider);
 
 textMagicSlider = new QLabel(magicSlider);
 textMagicSlider->setText("S\n\nL\n\nI\n\nD\n\nE");

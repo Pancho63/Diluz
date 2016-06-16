@@ -39,7 +39,6 @@ QList<QHostAddress> addr;
 
 #if defined(Q_OS_ANDROID)   // sur android
 QString locSettings = "/sdcard/settingsTeleco.ini";
-
 #else                       //autres
 QString locSettings ="settingsTeleco.ini";
 #endif
