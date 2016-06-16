@@ -1,5 +1,5 @@
 # Diluz
-OSC Remote controle for D::Light lighting console
+OSC Remote control for D::Light lighting console
 
 
 
