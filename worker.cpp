@@ -73,7 +73,7 @@ Worker::Worker(QObject *parent) :
     QObject(parent),
     ui(new WindowTeleco)
 {
-    ui->show();
+    ui->showFullScreen();
 
     thread = new QThread();
     listener = new Listener();
@@ -150,16 +150,16 @@ Worker::Worker(QObject *parent) :
 //SUBS   
     connect(ui->subnumpage, SIGNAL(currentIndexChanged(int)), this, SLOT(subNumPage(int)));
 
-    connect(ui->Sub01T,          SIGNAL(slideValue(int)),    this, SLOT(sub01(int)));
-    connect(ui->Sub02T,          SIGNAL(slideValue(int)),    this, SLOT(sub02(int)));
-    connect(ui->Sub03T,          SIGNAL(slideValue(int)),    this, SLOT(sub03(int)));
-    connect(ui->Sub04T,          SIGNAL(slideValue(int)),    this, SLOT(sub04(int)));
-    connect(ui->Sub05T,          SIGNAL(slideValue(int)),    this, SLOT(sub05(int)));
-    connect(ui->Sub06T,          SIGNAL(slideValue(int)),    this, SLOT(sub06(int)));
-    connect(ui->Sub07T,          SIGNAL(slideValue(int)),    this, SLOT(sub07(int)));
-    connect(ui->Sub08T,          SIGNAL(slideValue(int)),    this, SLOT(sub08(int)));
-    connect(ui->Sub09T,          SIGNAL(slideValue(int)),    this, SLOT(sub09(int)));
-    connect(ui->Sub10T,          SIGNAL(slideValue(int)),    this, SLOT(sub10(int)));
+    connect(ui->Sub01T,     SIGNAL(slideValue(int)),          this, SLOT(sub01(int)));
+    connect(ui->Sub02T,     SIGNAL(slideValue(int)),          this, SLOT(sub02(int)));
+    connect(ui->Sub03T,     SIGNAL(slideValue(int)),          this, SLOT(sub03(int)));
+    connect(ui->Sub04T,     SIGNAL(slideValue(int)),          this, SLOT(sub04(int)));
+    connect(ui->Sub05T,     SIGNAL(slideValue(int)),          this, SLOT(sub05(int)));
+    connect(ui->Sub06T,     SIGNAL(slideValue(int)),          this, SLOT(sub06(int)));
+    connect(ui->Sub07T,     SIGNAL(slideValue(int)),          this, SLOT(sub07(int)));
+    connect(ui->Sub08T,     SIGNAL(slideValue(int)),          this, SLOT(sub08(int)));
+    connect(ui->Sub09T,     SIGNAL(slideValue(int)),          this, SLOT(sub09(int)));
+    connect(ui->Sub10T,     SIGNAL(slideValue(int)),          this, SLOT(sub10(int)));
 
 
 

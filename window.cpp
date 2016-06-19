@@ -80,8 +80,7 @@ labelPortT->setText("D::Luz port");
 
 portTeleco = new QLineEdit;
 portTeleco->setText("7001");
-#if defined(Q_OS_IOS)
-#else
+#if !defined(Q_OS_IOS)
 portTeleco->setInputMethodHints(Qt::ImhDigitsOnly);
 #endif
 portTeleco->setFixedWidth(screenWidth/5);
@@ -115,8 +114,7 @@ labelPortDl->setText("D::Light port");
 
 portDlight = new QLineEdit;
 portDlight->setText("7000");
-#if defined(Q_OS_IOS)
-#else
+#if !defined(Q_OS_IOS)
 portDlight->setInputMethodHints(Qt::ImhDigitsOnly);
 #endif
 portDlight->setFixedWidth(screenWidth/5);
