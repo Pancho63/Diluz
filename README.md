@@ -40,11 +40,11 @@ La marche à suivre pourrait se résumer à :
 6. Dans la fenêtre Configure Project : sélectionner "iphoneos-clang Qt 5.6.0 for iOS" uniquement et cliquer sur "Configure project"
 7. Cliquer sur l'icone "Marteau" soit "Build Project" tout en bas de la colone de gauche
 8. QT Creator aura alors créé un dossier contenant le fichier Xcode DiLuz.xcodeproj. Ce dossier est par defaut généré dans le dossier précédent dans l'arborescence de vos fichiers.
-9. Ouvrir le fichier DiLuz.xcodeproj
+9. Double cliquez sur le fichier DiLuz.xcodeproj (Il s'ouvre dans XCode)
 10. Sélectionner le projet Xcode à sideloader dans la barre latérale de gauche
 11. Allez dans General / Identity et changer le Bundle Identfier. Vous pouvez simplement ajouter "123" à la fin du nom.
 12. Sous Team, sélectionner votre Apple ID
-13. Dans Deployement/Info/device orientation, décocher les 2 landscape (D::Luz n'est pas encore très bien visuellement
+13. Dans Deployement/Info/device orientation, décocher les 2 landscapes (D::Luz n'est pas encore très bien visuellement
     en orientation paysage..)
 14. Connecter votre iDevice via USB
 15. Dans Xcode, allez dans le menu Product et sélectionner votre iDevice dans Destination
