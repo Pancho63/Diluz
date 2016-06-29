@@ -311,5 +311,4 @@ void Listener::reStart()
  emit connexionOk(false);
  udpSocket->deleteLater();
  emit reboot();
- return;
 }

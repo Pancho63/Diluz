@@ -39,6 +39,7 @@ QList<QHostAddress> addr;
 
 #if defined(Q_OS_ANDROID)   // sur android
 QString locSettings = "/sdcard/settingsTeleco.ini";
+
 #else                       //autres
 QString locSettings ="settingsTeleco.ini";
 #endif
@@ -73,6 +74,7 @@ Worker::Worker(QObject *parent) :
     QObject(parent),
     ui(new WindowTeleco)
 {
+
     ui->showFullScreen();
 
     thread = new QThread();
@@ -81,6 +83,9 @@ Worker::Worker(QObject *parent) :
 
     groupAddress = QHostAddress("225.9.99.9");
     IpSend = groupAddress;
+
+    connect(qApp->primaryScreen(), SIGNAL( primaryOrientationChanged(Qt::ScreenOrientation)), this, SLOT(orientationChnged(Qt::ScreenOrientation)));
+
 
     connect(listener, SIGNAL(workRequested()),   thread, SLOT(start()));
     connect(thread,   SIGNAL(started()),       listener, SLOT(goOSC()));
@@ -150,16 +155,16 @@ Worker::Worker(QObject *parent) :
 //SUBS   
     connect(ui->subnumpage, SIGNAL(currentIndexChanged(int)), this, SLOT(subNumPage(int)));
 
-    connect(ui->Sub01T,     SIGNAL(slideValue(int)),          this, SLOT(sub01(int)));
-    connect(ui->Sub02T,     SIGNAL(slideValue(int)),          this, SLOT(sub02(int)));
-    connect(ui->Sub03T,     SIGNAL(slideValue(int)),          this, SLOT(sub03(int)));
-    connect(ui->Sub04T,     SIGNAL(slideValue(int)),          this, SLOT(sub04(int)));
-    connect(ui->Sub05T,     SIGNAL(slideValue(int)),          this, SLOT(sub05(int)));
-    connect(ui->Sub06T,     SIGNAL(slideValue(int)),          this, SLOT(sub06(int)));
-    connect(ui->Sub07T,     SIGNAL(slideValue(int)),          this, SLOT(sub07(int)));
-    connect(ui->Sub08T,     SIGNAL(slideValue(int)),          this, SLOT(sub08(int)));
-    connect(ui->Sub09T,     SIGNAL(slideValue(int)),          this, SLOT(sub09(int)));
-    connect(ui->Sub10T,     SIGNAL(slideValue(int)),          this, SLOT(sub10(int)));
+    connect(ui->Sub01T,          SIGNAL(slideValue(int)),    this, SLOT(sub01(int)));
+    connect(ui->Sub02T,          SIGNAL(slideValue(int)),    this, SLOT(sub02(int)));
+    connect(ui->Sub03T,          SIGNAL(slideValue(int)),    this, SLOT(sub03(int)));
+    connect(ui->Sub04T,          SIGNAL(slideValue(int)),    this, SLOT(sub04(int)));
+    connect(ui->Sub05T,          SIGNAL(slideValue(int)),    this, SLOT(sub05(int)));
+    connect(ui->Sub06T,          SIGNAL(slideValue(int)),    this, SLOT(sub06(int)));
+    connect(ui->Sub07T,          SIGNAL(slideValue(int)),    this, SLOT(sub07(int)));
+    connect(ui->Sub08T,          SIGNAL(slideValue(int)),    this, SLOT(sub08(int)));
+    connect(ui->Sub09T,          SIGNAL(slideValue(int)),    this, SLOT(sub09(int)));
+    connect(ui->Sub10T,          SIGNAL(slideValue(int)),    this, SLOT(sub10(int)));
 
 
 
@@ -187,7 +192,7 @@ Worker::Worker(QObject *parent) :
 
     connect(ui->masterpagemoins, SIGNAL(clicked()),           this, SLOT(mpmoins()));
     connect(ui->masterpageplus,  SIGNAL(clicked()),           this, SLOT(mpplus()));
-    connect(ui->nameOrContent,   SIGNAL(clicked(bool)),       this, SLOT(nameOrContent(bool)));
+    connect(ui->nameOrContent,   SIGNAL(clicked()),       this, SLOT(nameOrContent()));
 
 
 //scene
@@ -914,20 +919,19 @@ void Worker::mpmoins()
 void Worker::mpplus()
     { Message msg("/sub/incrPage"); msg.pushInt32(1); sendOSC(msg); }
 
-void Worker::nameOrContent(bool)
-    { for (int i=0; i<10;i++)
-          {ui->subsTextList->at(i)->setText("                                        ");}
-
+void Worker::nameOrContent()
+    {
     Message msg("/sub/page"); msg.pushInt32(ui->subnumpageLabel->text().toInt()); sendOSC(msg);
 
     if (nameAndNotContent)
-       { ui->nameOrContent->setText("Content");
-         ui->nameOrContent->setStyleSheet("QPushButton {background-color:black; color:white; border-color:white;}");
+       { ui->nameOrContent->setText(" Content ");
+         ui->nameOrContent->setStyleSheet("QPushButton {background-color:black; color:white; border-color:white;font-size: 18pt;}");
          nameAndNotContent=false;
+         return;
         }
-    else
-       { ui->nameOrContent->setText(" Name  ");
-         ui->nameOrContent->setStyleSheet("QPushButton {background-color:navy; color:white; border-color:navy;}");
+     if (!nameAndNotContent)
+       { ui->nameOrContent->setText("  Name   ");
+         ui->nameOrContent->setStyleSheet("QPushButton {background-color:navy; color:white; border-color:navy;font-size: 20pt;}");
          nameAndNotContent=true;
         }
     }
@@ -944,7 +948,7 @@ void Worker::chgText(QString flash, int no)
 { ui->subsFlashList->at(no-1)->setText(flash); }
 
 void Worker::setSubName(QString sub, int no)
-{ ui->subsTextList->at(no-1)->setText(sub); }
+{ ui->subsTextList->at(no-1)->setText(sub);}
 
 void Worker::setSubValue(int sub, int no)
 { ui->subsList->at(no-1)->setValue(sub);}
@@ -1334,4 +1338,143 @@ void Worker::supensionEtReveil(Qt::ApplicationState state)
         scan();
         tabindex(ui->tabs->currentIndex());
     }
+}
+
+void Worker::orientationChnged(Qt::ScreenOrientation orientation)
+{
+#if defined(Q_OS_ANDROID)
+    extern int screenWidth;
+    extern int screenHeight;
+#endif
+
+if (orientation==Qt::LandscapeOrientation)
+        {
+
+    ui->layoutH->removeItem(ui->layoutpad);
+    ui->layoutH->addWidget(ui->ecranSelect,  0, 0, 4, 1);
+    ui->layoutH->addItem(ui->layoutpad,      0, 2, 7, 1);
+    ui->layoutH->addWidget(ui->padPrev,      0, 1);
+    ui->layoutH->addWidget(ui->padNext,      1, 1);
+    ui->layoutH->addWidget(ui->yes,          2, 1);
+    ui->layoutH->addWidget(ui->no,           3, 1);
+    ui->layoutH->addWidget(ui->ecrantxt,     4, 0, 1, 2);
+    ui->layoutH->addWidget(ui->masterSceneT, 5, 0, 1, 2);
+    ui->layoutH->addWidget(ui->masterSubsT,  6, 0, 1, 2);
+
+    ui->layoutSU->removeItem(ui->layoutTitre);
+    ui->layoutSU->removeItem(ui->layoutSub1);
+    ui->layoutSU->removeItem(ui->layoutSub2);
+    ui->layoutSU->removeItem(ui->layoutSub3);
+    ui->layoutSU->removeItem(ui->layoutSub4);
+    ui->layoutSU->removeItem(ui->layoutSub5);
+    ui->layoutSU->removeItem(ui->layoutSub6);
+    ui->layoutSU->removeItem(ui->layoutSub7);
+    ui->layoutSU->removeItem(ui->layoutSub8);
+    ui->layoutSU->removeItem(ui->layoutSub9);
+    ui->layoutSU->removeItem(ui->layoutSub10);
+    ui->layoutSU->addItem(ui->layoutTitre, 0, 0, 1, 2);
+    ui->layoutSU->addItem(ui->layoutSub1, 1, 0);
+    ui->layoutSU->addItem(ui->layoutSub2, 2, 0);
+    ui->layoutSU->addItem(ui->layoutSub3, 3, 0);
+    ui->layoutSU->addItem(ui->layoutSub4, 4, 0);
+    ui->layoutSU->addItem(ui->layoutSub5, 5, 0);
+    ui->layoutSU->addItem(ui->layoutSub6, 1, 1);
+    ui->layoutSU->addItem(ui->layoutSub7, 2, 1);
+    ui->layoutSU->addItem(ui->layoutSub8, 3, 1);
+    ui->layoutSU->addItem(ui->layoutSub9, 4, 1);
+    ui->layoutSU->addItem(ui->layoutSub10, 5, 1);
+    ui->layoutSU->addWidget(ui->nomPageSub, 6, 0, 1, 2);
+
+    ui->layoutS->removeItem(ui->layoutGo);
+    ui->layoutS->removeItem(ui->layoutSeq);
+    ui->layoutS->addWidget(ui->textStepX1, 0, 0, 2, 1);
+    ui->layoutS->addLayout(ui->layoutGo,   1, 3);
+    ui->layoutS->addLayout(ui->layoutSeq,  0, 1, 1, 2);
+    ui->layoutS->addWidget(ui->sliderX1T,  1, 1);
+    ui->layoutS->addWidget(ui->sliderX2T,  1, 2);
+    ui->layoutS->addWidget(ui->joystickT,  0, 3);
+    ui->layoutS->addWidget(ui->textStepX2, 0, 4, 2, 1);
+
+    ui->layoutP->removeItem(ui->layoutChiffres);
+    ui->layoutP->removeItem(ui->layoutPad);
+    ui->layoutP->removeItem(ui->layoutCh);
+    ui->layoutP->removeItem(ui->layoutDim);
+    ui->layoutP->removeItem(ui->layoutTxt);
+    ui->layoutP->addWidget(ui->testLevelT,     0, 0);
+    ui->layoutP->addLayout(ui->layoutCh,       0, 1);
+    ui->layoutP->addWidget(ui->line,           0, 2);
+    ui->layoutP->addLayout(ui->layoutDim,      0, 3);
+    ui->layoutP->addLayout(ui->layoutChiffres, 0, 4);
+    ui->layoutP->addLayout(ui->layoutPad,      0, 5);
+    ui->layoutP->addLayout(ui->layoutTxt,      2, 0, 1, 6);
+
+#if defined(Q_OS_ANDROID)
+    ui->tabs->setFixedSize(screenHeight, screenWidth);
+#endif
+        }
+if (orientation==Qt::PortraitOrientation)
+        {
+
+    ui->layoutH->removeItem(ui->layoutpad);
+    ui->layoutH->addWidget(ui->ecranSelect,  0, 0, 1, 2);
+    ui->layoutH->addItem(ui->layoutpad,      0, 2, 2, 4);
+    ui->layoutH->addWidget(ui->padPrev,      1, 0);
+    ui->layoutH->addWidget(ui->padNext,      1, 1);
+    ui->layoutH->addWidget(ui->ecrantxt,     2, 0, 2, 5);
+    ui->layoutH->addWidget(ui->yes,          2, 5);
+    ui->layoutH->addWidget(ui->no,           3, 5);
+    ui->layoutH->addWidget(ui->masterSceneT, 4, 0, 1, 3);
+    ui->layoutH->addWidget(ui->masterSubsT,  4, 3, 1, 3);
+
+    ui->layoutSU->removeItem(ui->layoutTitre);
+    ui->layoutSU->removeItem(ui->layoutSub1);
+    ui->layoutSU->removeItem(ui->layoutSub2);
+    ui->layoutSU->removeItem(ui->layoutSub3);
+    ui->layoutSU->removeItem(ui->layoutSub4);
+    ui->layoutSU->removeItem(ui->layoutSub5);
+    ui->layoutSU->removeItem(ui->layoutSub6);
+    ui->layoutSU->removeItem(ui->layoutSub7);
+    ui->layoutSU->removeItem(ui->layoutSub8);
+    ui->layoutSU->removeItem(ui->layoutSub9);
+    ui->layoutSU->removeItem(ui->layoutSub10);
+    ui->layoutSU->addItem(ui->layoutTitre, 0, 0);
+    ui->layoutSU->addItem(ui->layoutSub1, 1, 0);
+    ui->layoutSU->addItem(ui->layoutSub2, 2, 0);
+    ui->layoutSU->addItem(ui->layoutSub3, 3, 0);
+    ui->layoutSU->addItem(ui->layoutSub4, 4, 0);
+    ui->layoutSU->addItem(ui->layoutSub5, 5, 0);
+    ui->layoutSU->addItem(ui->layoutSub6, 6, 0);
+    ui->layoutSU->addItem(ui->layoutSub7, 7, 0);
+    ui->layoutSU->addItem(ui->layoutSub8, 8, 0);
+    ui->layoutSU->addItem(ui->layoutSub9, 9, 0);
+    ui->layoutSU->addItem(ui->layoutSub10, 10, 0);
+    ui->layoutSU->addWidget(ui->nomPageSub, 11, 0);
+
+    ui->layoutS->removeItem(ui->layoutGo);
+    ui->layoutS->removeItem(ui->layoutSeq);
+    ui->layoutS->addWidget(ui->textStepX1, 0, 0, 1, 3);
+    ui->layoutS->addLayout(ui->layoutGo,   0, 3);
+    ui->layoutS->addLayout(ui->layoutSeq,  1, 0);
+    ui->layoutS->addWidget(ui->sliderX1T,  1, 1);
+    ui->layoutS->addWidget(ui->sliderX2T,  1, 2);
+    ui->layoutS->addWidget(ui->joystickT,  1, 3);
+    ui->layoutS->addWidget(ui->textStepX2, 2, 0, 1, 4);
+
+    ui->layoutP->removeItem(ui->layoutChiffres);
+    ui->layoutP->removeItem(ui->layoutPad);
+    ui->layoutP->removeItem(ui->layoutCh);
+    ui->layoutP->removeItem(ui->layoutDim);
+    ui->layoutP->removeItem(ui->layoutTxt);
+    ui->layoutP->addLayout(ui->layoutChiffres, 0, 0, 1, 2);
+    ui->layoutP->addLayout(ui->layoutPad,      0, 2, 1, 3);
+    ui->layoutP->addWidget(ui->testLevelT,     1, 0);
+    ui->layoutP->addWidget(ui->line,           1, 2);
+    ui->layoutP->addLayout(ui->layoutCh,       1, 1);
+    ui->layoutP->addLayout(ui->layoutDim,      1, 3);
+    ui->layoutP->addLayout(ui->layoutTxt,      2, 0, 1, 4);
+
+#if defined(Q_OS_ANDROID)
+    ui->tabs->setFixedSize(screenWidth, screenHeight);
+#endif
+        }
 }

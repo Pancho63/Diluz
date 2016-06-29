@@ -37,12 +37,10 @@
 #include <QTableView>
 #include <QStandardItemModel>
 #include <QHeaderView>
-//#include <QScrollArea>
 #include <QScroller>
 #include <QTabWidget>
 #include <QBoxLayout>
 #include <QDebug>
-//#include <QTouchEvent>
 
 #include "qbouton.h"
 #include "slideh.h"
@@ -58,6 +56,12 @@ public:
 //    ~WindowTeleco();
 
     QTabWidget *tabs;
+
+    QWidget *OSCTab;
+    QWidget *HomeTab;
+    QWidget *SUBsTab;
+    QWidget *SceneTab;
+    QWidget *PatchTab;
 
     QPushButton *castButton;
 
@@ -123,6 +127,8 @@ public:
     QLabel *textMasterScene;
     QLabel *textMasterSubs;
     QBouton *padClear;
+    QGridLayout *layoutH;
+    QGridLayout *layoutpad;
 
 
     QComboBox  *subnumpage;
@@ -186,6 +192,21 @@ public:
     QList<QLineEdit*> *subsNumList;
     QList<QSlider*> *subsList;
     QList<SlideH*> *subsListT;
+    QHBoxLayout *layoutTitre;
+    QVBoxLayout *layoutSubs1;
+    QVBoxLayout *layoutSubs2;
+    QGridLayout *layoutSU;
+    QHBoxLayout *layoutSub1;
+    QHBoxLayout *layoutSub2;
+    QHBoxLayout *layoutSub3;
+    QHBoxLayout *layoutSub4;
+    QHBoxLayout *layoutSub5;
+    QHBoxLayout *layoutSub6;
+    QHBoxLayout *layoutSub7;
+    QHBoxLayout *layoutSub8;
+    QHBoxLayout *layoutSub9;
+    QHBoxLayout *layoutSub10;
+
 
     QPushButton *Pause;
     QPushButton *GoBack;
@@ -205,6 +226,9 @@ public:
     QLabel *joystickLevel;
     SlideH *joystickT;
     QSlider *joystick;
+    QGridLayout *layoutS;
+    QVBoxLayout *layoutGo;
+    QGridLayout *layoutSeq;
 
 
     QPushButton *p0;
@@ -225,7 +249,6 @@ public:
     QPushButton *padClear_2;
     SlideH *testLevelT;
     QProgressBar *testLevel;
-//    QLineEdit *level;
     QPushButton *padPATCH;
     QPushButton *padUNPATCH;
     QPushButton *padPREV;
@@ -240,10 +263,21 @@ public:
     QLineEdit *ecrantxt_2;
     QPushButton *yes_2;
     QPushButton *no_2;
+    QGridLayout *layoutChiffres;
+    QGridLayout *layoutPad;
+    QGridLayout *layoutCh;
+    QGridLayout *layoutDim;
+    QGridLayout *layoutTxt;
+    QGridLayout *layoutP;
+
+
+
+
+public slots:
+
 
 protected:
 
- //    bool eventFilter(QObject *obj, QEvent *ev);
 };
 
 

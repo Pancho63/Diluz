@@ -155,7 +155,7 @@ private slots :
 
     void mpmoins();
     void mpplus();
-    void nameOrContent(bool);
+    void nameOrContent();
 
     void setSubNum(QString, int);
     void chgText(QString, int);
@@ -204,6 +204,8 @@ private slots :
     void yESp();
     void nOp();
 
+
+    void orientationChnged(Qt::ScreenOrientation);
 
 private:
 
