@@ -109,7 +109,7 @@ public slots:
 
 private :
 
-    QUdpSocket *udpSocket;
+    QUdpSocket  *udpSocket;
     QHostAddress groupAddress;
 
 private slots:

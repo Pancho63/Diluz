@@ -32,7 +32,6 @@ class QBouton : public QPushButton
 protected:
         void mouseDoubleClickEvent(QMouseEvent*)
         {emit doubleClick();}
-
 signals:
         void doubleClick();
 };

@@ -32,12 +32,9 @@ class SlideH : public QFrame
     public:
         SlideH(QWidget *parent = Q_NULLPTR, Qt::WindowFlags f = Qt::WindowFlags()): QFrame(parent, f)
         {
-
         }
 
 protected:
-
-
 
         bool  event(QEvent *event)
         {

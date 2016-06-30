@@ -53,7 +53,6 @@ class WindowTeleco : public QMainWindow
 
 public:
     WindowTeleco(QWidget *parent = 0);
-//    ~WindowTeleco();
 
     QTabWidget *tabs;
 
@@ -65,20 +64,20 @@ public:
 
     QPushButton *castButton;
 
-    QLabel *labelIpT;
-    QLabel *labelPortT;
-    QLabel *labelIPDl;
-    QLabel *labelPortDl;
-    QFrame* cadre1;
-    QFrame* cadre2;
-    QFrame* line;
-    QPushButton *refresh;
-    QComboBox *iPTeleco;
-    QLineEdit *portTeleco;
-    QLineEdit *iPDLight;
-    QLineEdit *portDlight;
-    QPushButton *request;
-    QPushButton *scanReseau;
+    QLabel       *labelIpT;
+    QLabel       *labelPortT;
+    QLabel       *labelIPDl;
+    QLabel       *labelPortDl;
+    QFrame       *cadre1;
+    QFrame       *cadre2;
+    QFrame       *line;
+    QPushButton  *refresh;
+    QComboBox    *iPTeleco;
+    QLineEdit    *portTeleco;
+    QLineEdit    *iPDLight;
+    QLineEdit    *portDlight;
+    QPushButton  *request;
+    QPushButton  *scanReseau;
     QRadioButton *checkConnected;
 
 
@@ -106,27 +105,27 @@ public:
     QPushButton *padGrp;
     QPushButton *padSub;
     QPushButton *padRec;
-    QBouton *padUpdate;
-    QBouton *padGoto;
-    QComboBox *padGotoCombo;
+    QBouton     *padUpdate;
+    QBouton     *padGoto;
+    QComboBox   *padGotoCombo;
     QPushButton *padScene;
     QButtonGroup *chiffresPad;
-    SlideH *magicSliderT;
-    QSlider *magicSlider;
-    QLabel *textMagicSlider;
-    QLineEdit *ecrantxt;
-    QTableView *ecranSelect;
+    SlideH      *magicSliderT;
+    QSlider     *magicSlider;
+    QLabel      *textMagicSlider;
+    QLineEdit   *ecrantxt;
+    QTableView  *ecranSelect;
     QStandardItemModel *modele;
     QPushButton *view;
     QPushButton *yes;
     QPushButton *no;
-    SlideH *masterSceneT;
+    SlideH      *masterSceneT;
     QProgressBar *masterScene;
-    SlideH *masterSubsT;
+    SlideH      *masterSubsT;
     QProgressBar *masterSubs;
-    QLabel *textMasterScene;
-    QLabel *textMasterSubs;
-    QBouton *padClear;
+    QLabel      *textMasterScene;
+    QLabel      *textMasterSubs;
+    QBouton     *padClear;
     QGridLayout *layoutH;
     QGridLayout *layoutpad;
 
@@ -213,19 +212,19 @@ public:
     QPushButton *GO;
     QPushButton *stepMoins;
     QPushButton *stepPlus;
-    SlideH *sliderX1T;
-    SlideH *sliderX2T;
-    QSlider *sliderX1;
-    QSlider *sliderX2;
-    QLineEdit *nStepX1;
-    QLineEdit *nCueX1;
-    QTextEdit *textStepX1;
-    QLineEdit *nStepX2;
-    QLineEdit *nCueX2;
-    QTextEdit *textStepX2;
-    QLabel *joystickLevel;
-    SlideH *joystickT;
-    QSlider *joystick;
+    SlideH      *sliderX1T;
+    SlideH      *sliderX2T;
+    QSlider     *sliderX1;
+    QSlider     *sliderX2;
+    QLineEdit   *nStepX1;
+    QLineEdit   *nCueX1;
+    QTextEdit   *textStepX1;
+    QLineEdit   *nStepX2;
+    QLineEdit   *nCueX2;
+    QTextEdit   *textStepX2;
+    QLabel      *joystickLevel;
+    SlideH      *joystickT;
+    QSlider     *joystick;
     QGridLayout *layoutS;
     QVBoxLayout *layoutGo;
     QGridLayout *layoutSeq;
@@ -269,16 +268,5 @@ public:
     QGridLayout *layoutDim;
     QGridLayout *layoutTxt;
     QGridLayout *layoutP;
-
-
-
-
-public slots:
-
-
-protected:
-
 };
-
-
 #endif // WINDOW_H

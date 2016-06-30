@@ -37,10 +37,9 @@ QString ipAdrr;
 QList<QHostAddress> addr;
 
 
-#if defined(Q_OS_ANDROID)   // sur android
+#if defined(Q_OS_ANDROID)
 QString locSettings = "/sdcard/settingsTeleco.ini";
-
-#else                       //autres
+#else
 QString locSettings ="settingsTeleco.ini";
 #endif
 
@@ -58,13 +57,13 @@ QString onglet;
 int     freescaleValue;
 QString selection;
 
-extern QVector<int> chSceneSelected;
+extern QVector<int>     chSceneSelected;
 extern QVector<QString> chSceneSelectedLevels;
 
-extern QVector<int> chPrepaSelected;
+extern QVector<int>     chPrepaSelected;
 extern QVector<QString> chPrepaSelectedLevels;
 
-extern QVector<int> subsSelected;
+extern QVector<int>     subsSelected;
 extern QVector<QString> subsSelectedLevels;
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -190,9 +189,9 @@ Worker::Worker(QObject *parent) :
     connect(ui->Flash09, SIGNAL(buttonReleased()), this, SLOT(flashOff9()));
     connect(ui->Flash10, SIGNAL(buttonReleased()), this, SLOT(flashOff10()));
 
-    connect(ui->masterpagemoins, SIGNAL(clicked()),           this, SLOT(mpmoins()));
-    connect(ui->masterpageplus,  SIGNAL(clicked()),           this, SLOT(mpplus()));
-    connect(ui->nameOrContent,   SIGNAL(clicked()),       this, SLOT(nameOrContent()));
+    connect(ui->masterpagemoins, SIGNAL(clicked()), this, SLOT(mpmoins()));
+    connect(ui->masterpageplus,  SIGNAL(clicked()), this, SLOT(mpplus()));
+    connect(ui->nameOrContent,   SIGNAL(clicked()), this, SLOT(nameOrContent()));
 
 
 //scene
@@ -307,10 +306,8 @@ Worker::~Worker()
 
 
 
-
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 void Worker::sendOSC(Message msg)
     {QHostAddress myIP;
@@ -627,8 +624,6 @@ void Worker::scene(bool tg)
             ui->padScene->setText("X1");
             sendOSC(msg);
             }
-
-
     else {  Message msg("/pad/prepa");msg.pushInt32(1);
             ui->padScene->setChecked(false);
             ui->padScene->setText("X2");
@@ -645,12 +640,12 @@ void Worker::masterSubs(int level)
     {
     if (ui->masterSubs->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/sub/master"); msg.pushInt32(i); sendOSC(msg);}}
-
+        {Message msg("/sub/master"); msg.pushInt32(i); sendOSC(msg);
+        }}
     if (ui->masterSubs->value()==255)
         { for (int i=255; i>level;i--)
-        {Message msg("/sub/master"); msg.pushInt32(i); sendOSC(msg);}}
-
+        {Message msg("/sub/master"); msg.pushInt32(i); sendOSC(msg);
+        }}
     Message msg("/sub/master"); msg.pushInt32(level); sendOSC(msg); }
 
 void Worker::masterScene(int level)
@@ -663,7 +658,6 @@ void Worker::masterScene(int level)
         { for (int i=255; i>level;i--)
         {Message msg("/seq/master"); msg.pushInt32(i); sendOSC(msg);
         }}
-
     Message msg("/seq/master"); msg.pushInt32(level); sendOSC(msg); }
 
 void Worker::errorIN(int ok)
@@ -751,7 +745,6 @@ void Worker::endMSlider()
     {timer1->stop();
      ui->magicSlider->setValue(50);
     }
-
 
 
 
@@ -1149,7 +1142,7 @@ void Worker::startOSC()
       {
             QMessageBox msgBox;
             msgBox.setWindowTitle("Port"+ui->portTeleco->text()+ "not available");
-            msgBox.setText("The D::Luz port MUST be >1024 and <49152");
+            msgBox.setText("The D::Luz OSC port MUST be >1024 and <49152");
             msgBox.exec();
             return;
         }
@@ -1174,7 +1167,7 @@ void Worker::scan()
       {
             QMessageBox msgBox;
             msgBox.setWindowTitle("Port "+ui->portTeleco->text()+ " not available");
-            msgBox.setText("The D::Luz port MUST be >1024 and <49152");
+            msgBox.setText("The D::Luz OSC port MUST be >1024 and <49152");
             msgBox.exec();
             return;
         }
@@ -1182,7 +1175,7 @@ void Worker::scan()
       {
             QMessageBox msgBox;
             msgBox.setWindowTitle("Port "+ui->portDlight->text()+ " not available");
-            msgBox.setText("The D::Light port MUST be >1024 and <49152");
+            msgBox.setText("The D::Light OSC port MUST be >1024 and <49152");
             msgBox.exec();
             return;
         }
@@ -1354,7 +1347,6 @@ if (orientation==Qt::LandscapeOrientation)
     ui->layoutH->addWidget(ui->ecranSelect,  0, 0, 4, 1);
     ui->layoutH->addItem(ui->layoutpad,      0, 2, 7, 1);
     ui->layoutH->addWidget(ui->padPrev,      0, 1);
-    ui->layoutH->addWidget(ui->padNext,      1, 1);
     ui->layoutH->addWidget(ui->yes,          2, 1);
     ui->layoutH->addWidget(ui->no,           3, 1);
     ui->layoutH->addWidget(ui->ecrantxt,     4, 0, 1, 2);
@@ -1362,27 +1354,17 @@ if (orientation==Qt::LandscapeOrientation)
     ui->layoutH->addWidget(ui->masterSubsT,  6, 0, 1, 2);
 
     ui->layoutSU->removeItem(ui->layoutTitre);
-    ui->layoutSU->removeItem(ui->layoutSub1);
-    ui->layoutSU->removeItem(ui->layoutSub2);
-    ui->layoutSU->removeItem(ui->layoutSub3);
-    ui->layoutSU->removeItem(ui->layoutSub4);
-    ui->layoutSU->removeItem(ui->layoutSub5);
     ui->layoutSU->removeItem(ui->layoutSub6);
     ui->layoutSU->removeItem(ui->layoutSub7);
     ui->layoutSU->removeItem(ui->layoutSub8);
     ui->layoutSU->removeItem(ui->layoutSub9);
     ui->layoutSU->removeItem(ui->layoutSub10);
-    ui->layoutSU->addItem(ui->layoutTitre, 0, 0, 1, 2);
-    ui->layoutSU->addItem(ui->layoutSub1, 1, 0);
-    ui->layoutSU->addItem(ui->layoutSub2, 2, 0);
-    ui->layoutSU->addItem(ui->layoutSub3, 3, 0);
-    ui->layoutSU->addItem(ui->layoutSub4, 4, 0);
-    ui->layoutSU->addItem(ui->layoutSub5, 5, 0);
-    ui->layoutSU->addItem(ui->layoutSub6, 1, 1);
-    ui->layoutSU->addItem(ui->layoutSub7, 2, 1);
-    ui->layoutSU->addItem(ui->layoutSub8, 3, 1);
-    ui->layoutSU->addItem(ui->layoutSub9, 4, 1);
-    ui->layoutSU->addItem(ui->layoutSub10, 5, 1);
+    ui->layoutSU->addItem(ui->layoutTitre,  0, 0, 1, 2);
+    ui->layoutSU->addItem(ui->layoutSub6,   1, 1);
+    ui->layoutSU->addItem(ui->layoutSub7,   2, 1);
+    ui->layoutSU->addItem(ui->layoutSub8,   3, 1);
+    ui->layoutSU->addItem(ui->layoutSub9,   4, 1);
+    ui->layoutSU->addItem(ui->layoutSub10,  5, 1);
     ui->layoutSU->addWidget(ui->nomPageSub, 6, 0, 1, 2);
 
     ui->layoutS->removeItem(ui->layoutGo);
@@ -1390,8 +1372,6 @@ if (orientation==Qt::LandscapeOrientation)
     ui->layoutS->addWidget(ui->textStepX1, 0, 0, 2, 1);
     ui->layoutS->addLayout(ui->layoutGo,   1, 3);
     ui->layoutS->addLayout(ui->layoutSeq,  0, 1, 1, 2);
-    ui->layoutS->addWidget(ui->sliderX1T,  1, 1);
-    ui->layoutS->addWidget(ui->sliderX2T,  1, 2);
     ui->layoutS->addWidget(ui->joystickT,  0, 3);
     ui->layoutS->addWidget(ui->textStepX2, 0, 4, 2, 1);
 
@@ -1400,6 +1380,8 @@ if (orientation==Qt::LandscapeOrientation)
     ui->layoutP->removeItem(ui->layoutCh);
     ui->layoutP->removeItem(ui->layoutDim);
     ui->layoutP->removeItem(ui->layoutTxt);
+    ui->layoutChiffres->setContentsMargins(0, 0, 0, 0);
+    ui->layoutPad->setContentsMargins(0, 0, 0, 0);
     ui->layoutP->addWidget(ui->testLevelT,     0, 0);
     ui->layoutP->addLayout(ui->layoutCh,       0, 1);
     ui->layoutP->addWidget(ui->line,           0, 2);
@@ -1419,7 +1401,6 @@ if (orientation==Qt::PortraitOrientation)
     ui->layoutH->addWidget(ui->ecranSelect,  0, 0, 1, 2);
     ui->layoutH->addItem(ui->layoutpad,      0, 2, 2, 4);
     ui->layoutH->addWidget(ui->padPrev,      1, 0);
-    ui->layoutH->addWidget(ui->padNext,      1, 1);
     ui->layoutH->addWidget(ui->ecrantxt,     2, 0, 2, 5);
     ui->layoutH->addWidget(ui->yes,          2, 5);
     ui->layoutH->addWidget(ui->no,           3, 5);
@@ -1427,27 +1408,17 @@ if (orientation==Qt::PortraitOrientation)
     ui->layoutH->addWidget(ui->masterSubsT,  4, 3, 1, 3);
 
     ui->layoutSU->removeItem(ui->layoutTitre);
-    ui->layoutSU->removeItem(ui->layoutSub1);
-    ui->layoutSU->removeItem(ui->layoutSub2);
-    ui->layoutSU->removeItem(ui->layoutSub3);
-    ui->layoutSU->removeItem(ui->layoutSub4);
-    ui->layoutSU->removeItem(ui->layoutSub5);
     ui->layoutSU->removeItem(ui->layoutSub6);
     ui->layoutSU->removeItem(ui->layoutSub7);
     ui->layoutSU->removeItem(ui->layoutSub8);
     ui->layoutSU->removeItem(ui->layoutSub9);
     ui->layoutSU->removeItem(ui->layoutSub10);
-    ui->layoutSU->addItem(ui->layoutTitre, 0, 0);
-    ui->layoutSU->addItem(ui->layoutSub1, 1, 0);
-    ui->layoutSU->addItem(ui->layoutSub2, 2, 0);
-    ui->layoutSU->addItem(ui->layoutSub3, 3, 0);
-    ui->layoutSU->addItem(ui->layoutSub4, 4, 0);
-    ui->layoutSU->addItem(ui->layoutSub5, 5, 0);
-    ui->layoutSU->addItem(ui->layoutSub6, 6, 0);
-    ui->layoutSU->addItem(ui->layoutSub7, 7, 0);
-    ui->layoutSU->addItem(ui->layoutSub8, 8, 0);
-    ui->layoutSU->addItem(ui->layoutSub9, 9, 0);
-    ui->layoutSU->addItem(ui->layoutSub10, 10, 0);
+    ui->layoutSU->addItem(ui->layoutTitre,  0, 0);
+    ui->layoutSU->addItem(ui->layoutSub6,   6, 0);
+    ui->layoutSU->addItem(ui->layoutSub7,   7, 0);
+    ui->layoutSU->addItem(ui->layoutSub8,   8, 0);
+    ui->layoutSU->addItem(ui->layoutSub9,   9, 0);
+    ui->layoutSU->addItem(ui->layoutSub10,  10, 0);
     ui->layoutSU->addWidget(ui->nomPageSub, 11, 0);
 
     ui->layoutS->removeItem(ui->layoutGo);
@@ -1455,8 +1426,6 @@ if (orientation==Qt::PortraitOrientation)
     ui->layoutS->addWidget(ui->textStepX1, 0, 0, 1, 3);
     ui->layoutS->addLayout(ui->layoutGo,   0, 3);
     ui->layoutS->addLayout(ui->layoutSeq,  1, 0);
-    ui->layoutS->addWidget(ui->sliderX1T,  1, 1);
-    ui->layoutS->addWidget(ui->sliderX2T,  1, 2);
     ui->layoutS->addWidget(ui->joystickT,  1, 3);
     ui->layoutS->addWidget(ui->textStepX2, 2, 0, 1, 4);
 
@@ -1465,6 +1434,8 @@ if (orientation==Qt::PortraitOrientation)
     ui->layoutP->removeItem(ui->layoutCh);
     ui->layoutP->removeItem(ui->layoutDim);
     ui->layoutP->removeItem(ui->layoutTxt);
+    ui->layoutChiffres->setContentsMargins(0, 0, 0, 5);
+    ui->layoutPad->setContentsMargins(0, 0, 0, 5);
     ui->layoutP->addLayout(ui->layoutChiffres, 0, 0, 1, 2);
     ui->layoutP->addLayout(ui->layoutPad,      0, 2, 1, 3);
     ui->layoutP->addWidget(ui->testLevelT,     1, 0);

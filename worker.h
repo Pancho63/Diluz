@@ -212,17 +212,14 @@ private:
     bool isConnectedToNetwork();
 
     WindowTeleco *ui;
-
-    QThread *thread;
-
-    Listener *listener;
-
-    QUdpSocket *udpSocketSend;
-    QHostAddress groupAddress;
-    QHostAddress IpSend;
-    QTimer *timer;
-    QTimer *timer1;
-    QTimer *timer2;
+    QThread      *thread;
+    Listener     *listener;
+    QUdpSocket   *udpSocketSend;
+    QHostAddress  groupAddress;
+    QHostAddress  IpSend;
+    QTimer       *timer;
+    QTimer       *timer1;
+    QTimer       *timer2;
 
 };
 

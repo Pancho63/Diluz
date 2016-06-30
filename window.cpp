@@ -75,7 +75,7 @@ iPTeleco->setStyleSheet("QComboBox                   { background: lightblue; co
 
 labelPortT = new QLabel;
 labelPortT->setStyleSheet("QLabel {border:transparent}");
-labelPortT->setText("D::Luz port");
+labelPortT->setText("D::Luz OSC port");
 
 portTeleco = new QLineEdit;
 portTeleco->setText("7001");
@@ -109,7 +109,7 @@ iPDLight->setFixedWidth(screenWidth/2.5);
 
 labelPortDl = new QLabel;
 labelPortDl->setStyleSheet("QLabel {border:transparent}");
-labelPortDl->setText("D::Light port");
+labelPortDl->setText("D::Light OSC port");
 
 portDlight = new QLineEdit;
 portDlight->setText("7000");
@@ -145,7 +145,6 @@ layoutDl->addWidget(request,        2, 1);
 scanReseau = new QPushButton;
 scanReseau->setText("Go OSC");
 scanReseau->setFocusPolicy(Qt::NoFocus);
-//scanReseau->setFixedHeight(screenWidth/5);
 
 castButton = new QPushButton;
 castButton->setText("Mode = Unicast");
@@ -224,25 +223,25 @@ padClear->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
 
 padCH = new QPushButton;
-padCH->setStyleSheet("QPushButton          {background-color:purple; color:white; border-color:purple;}"
-                     "QPushButton:disabled {background-color:black; color:grey;}");
 padCH->setText("CH");
 padCH->setFocusPolicy(Qt::NoFocus);
 padCH->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
+padCH->setStyleSheet("QPushButton          {background-color:purple; color:white; border-color:purple;}"
+                     "QPushButton:disabled {background-color:black; color:grey;}");
 
 padSub = new QPushButton;
-padSub->setStyleSheet("QPushButton          {background-color:purple; color:white; border-color:purple;}"
-                      "QPushButton:disabled {background-color:black; color:grey;}");
 padSub->setText("Sub");
 padSub->setFocusPolicy(Qt::NoFocus);
 padSub->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
+padSub->setStyleSheet("QPushButton          {background-color:purple; color:white; border-color:purple;}"
+                      "QPushButton:disabled {background-color:black; color:grey;}");
 
 padGrp = new QPushButton;
-padGrp->setStyleSheet("QPushButton          {background-color:purple; color:white; border-color:purple;}"
-                      "QPushButton:disabled {color:grey;background-color:black;}");
 padGrp->setText("Grp");
 padGrp->setFocusPolicy(Qt::NoFocus);
 padGrp->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
+padGrp->setStyleSheet("QPushButton          {background-color:purple; color:white; border-color:purple;}"
+                      "QPushButton:disabled {color:grey;background-color:black;}");
 
 padGoto = new QBouton("goto");
 padGoto->setText(" Goto ");
@@ -258,28 +257,28 @@ padGotoCombo->addItem("StepID");
 padGotoCombo->setEnabled(false);
 
 padRec = new QPushButton;
-padRec->setStyleSheet("QPushButton          {background-color:darkred; color:white; border-color:darkred;}"
-                      "QPushButton:disabled {background-color:black; color:grey;}");
 padRec->setText("Rec");
 padRec->setFocusPolicy(Qt::NoFocus);
 padRec->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
+padRec->setStyleSheet("QPushButton          {background-color:darkred; color:white; border-color:darkred;}"
+                      "QPushButton:disabled {background-color:black; color:grey;}");
 
 padUpdate = new QBouton("Update");
-padUpdate->setStyleSheet("QPushButton          {background-color:orange; color:white; border-color:orange;}"
-                         "QPushButton:disabled {background-color:black; color:grey;}");
-padUpdate->setText("Up\n date ");
+padUpdate->setText("Up\n date  ");
 padUpdate->setFocusPolicy(Qt::NoFocus);
 padUpdate->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
+padUpdate->setStyleSheet("QPushButton          {background-color:orange; color:white; border-color:orange;}"
+                         "QPushButton:disabled {background-color:black; color:grey;}");
 
 padScene = new QPushButton;
 padScene->setText("X1");
 padScene->setCheckable(true);
 padScene->setChecked(true);
+padScene->setFocusPolicy(Qt::NoFocus);
+padScene->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 padScene->setStyleSheet("QPushButton:checked  {background-color: red; border-color: red;} "
                         "QPushButton          {background-color: green; border-color: green;}"
                         "QPushButton:disabled {background-color: black; color:grey;}");
-padScene->setFocusPolicy(Qt::NoFocus);
-padScene->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
 pad0 = new QPushButton;
 pad0->setText("0");
@@ -365,7 +364,7 @@ magSl->addWidget(magicSlider);
 
 textMagicSlider = new QLabel(magicSlider);
 textMagicSlider->setText("S\nL\nI\nD\nE");
-textMagicSlider->setStyleSheet("QLabel:disabled        {color:white; font:bold; font-size:18pt;}");
+textMagicSlider->setStyleSheet("QLabel:disabled        {color:white; font:bold;}");
 textMagicSlider->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 
 QVBoxLayout *magicS = new QVBoxLayout(magicSlider);
@@ -378,14 +377,14 @@ ecranSelect = new QTableView;
 ecranSelect->setModel(modele);
 ecranSelect->verticalHeader()->hide();
 ecranSelect->horizontalHeader()->setSectionResizeMode(QHeaderView::Stretch);
-ecranSelect->setStyleSheet("QTableView                  { border-color:transparent;}"
-                           "QHeaderView::section        { background:transparent;}"
-                           "QHeaderView                 { border-color : black; color : black; }"
-                           "QTableCornerButton::section { background-color:transparent;border-color:transparent;}");
 ecranSelect->setFocusPolicy(Qt::NoFocus);
 ecranSelect->setSelectionMode(QAbstractItemView::NoSelection);
 ecranSelect->setVerticalScrollMode(QAbstractItemView::ScrollPerPixel);
 ecranSelect->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+ecranSelect->setStyleSheet("QTableView                  { border-color:transparent;}"
+                           "QHeaderView::section        { background:transparent;}"
+                           "QHeaderView                 { border-color : black; color : black; }"
+                           "QTableCornerButton::section { background-color:transparent;border-color:transparent;}");
 QScroller::grabGesture(ecranSelect, QScroller::LeftMouseButtonGesture);
 
 
@@ -408,7 +407,7 @@ yes->setEnabled(false);
 no = new QPushButton;
 no->setText(" NO ");
 no->setFocusPolicy(Qt::NoFocus);
-yes->setFixedWidth(screenWidth/6.5);
+no->setFixedWidth(screenWidth/6.5);
 no->setStyleSheet("QPushButton {height: 30px;}");
 no->setEnabled(false);
 
@@ -511,7 +510,7 @@ layoutH->addWidget(ecranSelect,  0, 0, 1, 2);
 layoutH->addItem(layoutpad,      0, 2, 2, 5);
 layoutH->addWidget(padPrev,      1, 0);
 layoutH->addWidget(padNext,      1, 1);
-layoutH->addWidget(ecrantxt,    2, 0, 2, 6);
+layoutH->addWidget(ecrantxt,     2, 0, 2, 6);
 layoutH->addWidget(yes,          2, 6);
 layoutH->addWidget(no,           3, 6);
 layoutH->addWidget(masterSceneT, 4, 0, 1, 3);
@@ -561,17 +560,19 @@ masterpagemoins = new QPushButton;
 masterpagemoins->setText("<");
 masterpagemoins->setFixedWidth(screenWidth/7.5);
 masterpagemoins->setFocusPolicy(Qt::NoFocus);
+masterpagemoins->setMaximumHeight(screenHeight/15);
 masterpagemoins->setStyleSheet("QPushButton         { background-color:dimgrey; color:white;border-color:dimgrey;}"
                                "QPushButton:disabled{ background-color:black; color:grey;}");
-masterpagemoins->setMaximumHeight(screenHeight/15);
+
 
 masterpageplus = new QPushButton;
 masterpageplus->setText(">");
 masterpageplus->setFixedWidth(screenWidth/7.5);
 masterpageplus->setFocusPolicy(Qt::NoFocus);
+masterpageplus->setMaximumHeight(screenHeight/15);
 masterpageplus->setStyleSheet("QPushButton         { background-color:dimgrey; color:white;border-color:dimgrey;}"
                               "QPushButton:disabled{ background-color:black; color:grey;}");
-masterpageplus->setMaximumHeight(screenHeight/15);
+
 
 
 // ///////
@@ -663,100 +664,100 @@ Flash01->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash01->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash01->setText(" FLASH ");
 Flash01->setFocusPolicy(Qt::NoFocus);
+Flash01->setCheckable(true);
 Flash01->setStyleSheet("QPushButton        { height: 40px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash01->setCheckable(true);
 
 Flash02 = new multiPushButton;
 Flash02->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash02->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash02->setText(" FLASH ");
 Flash02->setFocusPolicy(Qt::NoFocus);
+Flash02->setCheckable(true);
 Flash02->setStyleSheet("QPushButton        { height: 40px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash02->setCheckable(true);
 
 Flash03 = new multiPushButton;
 Flash03->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash03->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash03->setText(" FLASH ");
 Flash03->setFocusPolicy(Qt::NoFocus);
+Flash03->setCheckable(true);
 Flash03->setStyleSheet("QPushButton        { height: 40px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash03->setCheckable(true);
 
 Flash04 = new multiPushButton;
 Flash04->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash04->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash04->setText(" FLASH ");
 Flash04->setFocusPolicy(Qt::NoFocus);
+Flash04->setCheckable(true);
 Flash04->setStyleSheet("QPushButton        { height: 40px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash04->setCheckable(true);
 
 Flash05 = new multiPushButton;
 Flash05->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash05->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash05->setText(" FLASH ");
 Flash05->setFocusPolicy(Qt::NoFocus);
+Flash05->setCheckable(true);
 Flash05->setStyleSheet("QPushButton        { height: 40px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash05->setCheckable(true);
 
 Flash06 = new multiPushButton;
 Flash06->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash06->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash06->setText(" FLASH ");
 Flash06->setFocusPolicy(Qt::NoFocus);
+Flash06->setCheckable(true);
 Flash06->setStyleSheet("QPushButton        { height: 40px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash06->setCheckable(true);
 
 Flash07 = new multiPushButton;
 Flash07->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash07->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash07->setText(" FLASH ");
 Flash07->setFocusPolicy(Qt::NoFocus);
+Flash07->setCheckable(true);
 Flash07->setStyleSheet("QPushButton        { height: 40px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash07->setCheckable(true);
 
 Flash08 = new multiPushButton;
 Flash08->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash08->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash08->setText(" FLASH ");
 Flash08->setFocusPolicy(Qt::NoFocus);
+Flash08->setCheckable(true);
 Flash08->setStyleSheet("QPushButton        { height: 40px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash08->setCheckable(true);
 
 Flash09 = new multiPushButton;
 Flash09->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash09->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash09->setText(" FLASH ");
 Flash09->setFocusPolicy(Qt::NoFocus);
+Flash09->setCheckable(true);
 Flash09->setStyleSheet("QPushButton        { height: 45px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash09->setCheckable(true);
 
 Flash10 = new multiPushButton;
 Flash10->setAttribute(Qt::WA_AcceptTouchEvents);
 Flash10->setSizePolicy(QSizePolicy::Fixed, QSizePolicy::Expanding);
 Flash10->setText(" FLASH ");
 Flash10->setFocusPolicy(Qt::NoFocus);
+Flash10->setCheckable(true);
 Flash10->setStyleSheet("QPushButton        { height: 40px;font-size:17px;}"
                        "QPushButton:pressed{ background-color: navy; border: none;}"
                        "QPushButton:checked{ background-color: navy; border: none;}");
-Flash10->setCheckable(true);
 
 subsFlashList = new QList<multiPushButton*>;
 subsFlashList->append(Flash01);
@@ -779,7 +780,7 @@ Sub01->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub01->setMaximum(255);
 Sub01->setOrientation(Qt::Horizontal);
 Sub01->setEnabled(false);
-Sub01->setStyleSheet(" QSlider::sub-page:disabled {background: navy; border: grey;}");
+Sub01->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
 Sub01txt = new QLabel(Sub01);
 Sub01txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub01txt->setText("                                   ");
@@ -794,7 +795,7 @@ Sub02->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub02->setMaximum(255);
 Sub02->setOrientation(Qt::Horizontal);
 Sub02->setEnabled(false);
-Sub02->setStyleSheet(" QSlider::sub-page:disabled {background: navy; border: grey;}");
+Sub02->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
 Sub02txt = new QLabel(Sub02);
 Sub02txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub02txt->setText("                                   ");
@@ -809,7 +810,7 @@ Sub03->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub03->setMaximum(255);
 Sub03->setOrientation(Qt::Horizontal);
 Sub03->setEnabled(false);
-Sub03->setStyleSheet(" QSlider::sub-page:disabled {background: navy; border: grey;}");
+Sub03->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
 Sub03txt = new QLabel(Sub03);
 Sub03txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub03txt->setText("                                   ");
@@ -824,7 +825,7 @@ Sub04->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub04->setMaximum(255);
 Sub04->setOrientation(Qt::Horizontal);
 Sub04->setEnabled(false);
-Sub04->setStyleSheet(" QSlider::sub-page:disabled {background: navy; border: grey;}");
+Sub04->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
 Sub04txt = new QLabel(Sub04);
 Sub04txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub04txt->setText("                                   ");
@@ -839,7 +840,7 @@ Sub05->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub05->setMaximum(255);
 Sub05->setOrientation(Qt::Horizontal);
 Sub05->setEnabled(false);
-Sub05->setStyleSheet(" QSlider::sub-page:disabled {background: navy; border: grey;}");
+Sub05->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
 Sub05txt = new QLabel(Sub05);
 Sub05txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub05txt->setText("                                   ");
@@ -854,7 +855,7 @@ Sub06->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub06->setMaximum(255);
 Sub06->setOrientation(Qt::Horizontal);
 Sub06->setEnabled(false);
-Sub06->setStyleSheet(" QSlider::sub-page:disabled {background: navy; border: grey;}");
+Sub06->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
 Sub06txt = new QLabel(Sub06);
 Sub06txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub06txt->setText("                                   ");
@@ -869,7 +870,7 @@ Sub07->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub07->setMaximum(255);
 Sub07->setOrientation(Qt::Horizontal);
 Sub07->setEnabled(false);
-Sub07->setStyleSheet(" QSlider::sub-page:disabled {background: navy; border: grey;}");
+Sub07->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
 Sub07txt = new QLabel(Sub07);
 Sub07txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub07txt->setText("                                   ");
@@ -884,7 +885,7 @@ Sub08->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub08->setMaximum(255);
 Sub08->setOrientation(Qt::Horizontal);
 Sub08->setEnabled(false);
-Sub08->setStyleSheet(" QSlider::sub-page:disabled {background: navy; border: grey;}");
+Sub08->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
 Sub08txt = new QLabel(Sub08);
 Sub08txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub08txt->setText("                                   ");
@@ -899,7 +900,7 @@ Sub09->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub09->setMaximum(255);
 Sub09->setOrientation(Qt::Horizontal);
 Sub09->setEnabled(false);
-Sub09->setStyleSheet(" QSlider::sub-page:disabled{background: navy; border: grey;}");
+Sub09->setStyleSheet(" QSlider::sub-page:disabled{background: navy;}");
 Sub09txt = new QLabel(Sub09);
 Sub09txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub09txt->setText("                                   ");
@@ -914,7 +915,7 @@ Sub10->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub10->setMaximum(255);
 Sub10->setOrientation(Qt::Horizontal);
 Sub10->setEnabled(false);
-Sub10->setStyleSheet(" QSlider::sub-page:disabled{background: navy; border: grey;}");
+Sub10->setStyleSheet(" QSlider::sub-page:disabled{background: navy;}");
 Sub10txt = new QLabel(Sub10);
 Sub10txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub10txt->setText("                                   ");
@@ -1091,17 +1092,17 @@ layoutSub10->addWidget(Sub10T);
 
 layoutSU = new QGridLayout;
 layoutSU->setSpacing(0);
-layoutSU->addItem(layoutTitre, 0, 0);
-layoutSU->addItem(layoutSub1, 1, 0);
-layoutSU->addItem(layoutSub2, 2, 0);
-layoutSU->addItem(layoutSub3, 3, 0);
-layoutSU->addItem(layoutSub4, 4, 0);
-layoutSU->addItem(layoutSub5, 5, 0);
-layoutSU->addItem(layoutSub6, 6, 0);
-layoutSU->addItem(layoutSub7, 7, 0);
-layoutSU->addItem(layoutSub8, 8, 0);
-layoutSU->addItem(layoutSub9, 9, 0);
-layoutSU->addItem(layoutSub10, 10, 0);
+layoutSU->addItem(layoutTitre,  0, 0);
+layoutSU->addItem(layoutSub1,   1, 0);
+layoutSU->addItem(layoutSub2,   2, 0);
+layoutSU->addItem(layoutSub3,   3, 0);
+layoutSU->addItem(layoutSub4,   4, 0);
+layoutSU->addItem(layoutSub5,   5, 0);
+layoutSU->addItem(layoutSub6,   6, 0);
+layoutSU->addItem(layoutSub7,   7, 0);
+layoutSU->addItem(layoutSub8,   8, 0);
+layoutSU->addItem(layoutSub9,   9, 0);
+layoutSU->addItem(layoutSub10,  10, 0);
 layoutSU->addWidget(nomPageSub, 11, 0);
 
 
@@ -1114,17 +1115,17 @@ SUBsTab->setLayout(layoutSU);
 Pause = new QPushButton;
 Pause->setText("PAUSE");
 Pause->setFocusPolicy(Qt::NoFocus);
-Pause->setStyleSheet("QPushButton {height: 32px; font-size:15pt;}");
+Pause->setStyleSheet("QPushButton {height: 30px; font-size:15pt;}");
 
 GoBack = new QPushButton;
-GoBack->setText("GOBACK");
+GoBack->setText(" GOBACK ");
 GoBack->setFocusPolicy(Qt::NoFocus);
-GoBack->setStyleSheet("QPushButton {height: 32px;font-size:13pt;}");
+GoBack->setStyleSheet("QPushButton {height: 30px;font-size:13pt;}");
 
 GO = new QPushButton;
 GO->setText("GO");
 GO->setFocusPolicy(Qt::NoFocus);
-GO->setStyleSheet("QPushButton {height: 32px;font-size:15pt;}");
+GO->setStyleSheet("QPushButton {height: 30px;font-size:15pt;}");
 
 stepMoins = new QPushButton;
 stepMoins->setText("STEP -");
@@ -1180,13 +1181,13 @@ QLabel *labelStep = new QLabel;
 labelStep->setText("Step");
 labelStep->setFixedWidth((screenWidth/7.5)-5);
 labelStep->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-labelStep->setStyleSheet("QLabel{font-size:14pt;}");
+labelStep->setStyleSheet("QLabel{font-size:13pt;}");
 
 QLabel *labelCue = new QLabel;
 labelCue->setText("Cue");
 labelCue->setFixedWidth((screenWidth/7.5)+5);
 labelCue->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-labelCue->setStyleSheet("QLabel{font-size:14pt;}");
+labelCue->setStyleSheet("QLabel{font-size:13pt;}");
 
 nStepX1 = new QLineEdit;
 nStepX1->setFixedWidth((screenWidth/7.5)-5);
@@ -1203,7 +1204,6 @@ nCueX1->setStyleSheet("QLineEdit {color : red; border-color : red;font-size:14pt
 textStepX1 = new QTextEdit;
 textStepX1->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
 textStepX1->setReadOnly(true);
-//textStepX1->setFixedHeight(screenHeight/4);
 textStepX1->setStyleSheet("QTextEdit {color : red; border: 2px outset red;}");
 textStepX1->setText("                                                                                                                                                                                                                                                                ");
 
@@ -1221,7 +1221,6 @@ nCueX2->setStyleSheet("QLineEdit {color : green; border-color : green;font-size:
 
 textStepX2 = new QTextEdit;
 textStepX2->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-//textStepX2->setFixedHeight(screenHeight/5.5);
 textStepX2->setReadOnly(true);
 textStepX2->setStyleSheet("QTextEdit {color : green; border: 2px outset green;}");
 textStepX2->setText("                                                                                                                                                                                                                                                                ");
@@ -1256,6 +1255,7 @@ textJoystick->setStyleSheet("QLabel {color:white; font : bold;font-size:14pt}");
 textJoystick->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 
 QVBoxLayout *joy = new QVBoxLayout(joystick);
+joy->setSpacing(0);
 joy->addWidget(joystickLevel);
 joy->addWidget(textJoystick);
 
@@ -1340,11 +1340,11 @@ chiffresPatch->addButton(p8);
 chiffresPatch->addButton(p9);
 
 padPoint_2 = new QPushButton;
-padPoint_2->setText("   .   ");
+padPoint_2->setText("    .   ");
 padPoint_2->setFocusPolicy(Qt::NoFocus);
 
 padClear_2 = new QPushButton;
-padClear_2->setText(" Clr ");
+padClear_2->setText("  Clr  ");
 padClear_2->setFocusPolicy(Qt::NoFocus);
 
 padPlus_2 = new QPushButton;
@@ -1420,7 +1420,6 @@ padCh_2->setCheckable(true);
 padCh_2->setFocusPolicy(Qt::NoFocus);
 
 nChannel = new QTextEdit;
-//nChannel->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 nChannel->setReadOnly(true);
 nChannel->setStyleSheet("QTextEdit:disabled{color:silver}");
 nChannel->setFocusPolicy(Qt::NoFocus);
@@ -1428,7 +1427,6 @@ nChannel->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 QScroller::grabGesture(nChannel, QScroller::LeftMouseButtonGesture);
 
 nDimmer = new QTextEdit;
-//nDimmer->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Minimum);
 nDimmer->setReadOnly(true);
 nDimmer->setStyleSheet("QTextEdit:disabled{color:silver}");
 nDimmer->setFocusPolicy(Qt::NoFocus);
@@ -1448,12 +1446,11 @@ testLevel->setAlignment(Qt::AlignCenter);
 testLevel->setFormat("%p");
 testLevel->setOrientation(Qt::Vertical);
 testLevel->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+testLevel->setFocusPolicy(Qt::NoFocus);
 testLevel->setStyleSheet(" QProgressBar                 {background: black; border:1px outset purple; border-radius:5px}"
                          " QProgressBar::chunk          {background: purple; border-radius:0px}"
                          " QProgressBar:disabled        {background: darkgrey;}"
-                         " QProgressBar::chunk:disabled {background: darkgrey;}"
-                                                  );
-testLevel->setFocusPolicy(Qt::NoFocus);
+                         " QProgressBar::chunk:disabled {background: darkgrey;}");
 
 QVBoxLayout *testT = new QVBoxLayout(testLevelT);
 testT->setMargin(0);
@@ -1461,9 +1458,8 @@ testT->addWidget(testLevel);
 
 line = new QFrame;
 line->setFrameStyle(QFrame::VLine | QFrame::Raised);
-line->setStyleSheet("QFrame           {border :1px outset dimgrey; border-radius:5px; background:dimgrey;}"
-                     "QFrame:disabled {border :1px outset grey; background:grey;}");
-
+line->setStyleSheet("QFrame          {border :1px outset dimgrey; border-radius:5px; background:dimgrey;}"
+                    "QFrame:disabled {border :1px outset grey; background:grey;}");
 
 
 ecrantxt_2 = new QLineEdit;
@@ -1471,7 +1467,6 @@ ecrantxt_2->setSizePolicy(QSizePolicy::Minimum, QSizePolicy::Expanding);
 ecrantxt_2->setStyleSheet("QLineEdit {background: lightblue;color : black; font-size: 24px}");
 ecrantxt_2->setReadOnly(true);
 ecrantxt_2->setAlignment(Qt::AlignCenter|Qt::AlignLeading|Qt::AlignLeft);
-//ecrantxt_2->setMinimumHeight(screenHeight/10);
 
 yes_2 = new QPushButton;
 yes_2->setText("YES");
@@ -1515,7 +1510,7 @@ layoutPad->addWidget(padNEXT,    3, 1);
 
 layoutCh = new QGridLayout;
 layoutCh->setSpacing(0);
-layoutCh->setContentsMargins(5, 0, 5, 0);
+layoutCh->setContentsMargins( 5, 0, 5, 0);
 layoutCh->addWidget(padCh_2,     0, 0);
 layoutCh->addWidget(nChannel,    1, 0, 2, 1);
 layoutCh->addWidget(channelTest, 3, 0);
@@ -1523,9 +1518,9 @@ layoutCh->addWidget(channelTest, 3, 0);
 layoutDim = new QGridLayout;
 layoutDim->setSpacing(0);
 layoutDim->setContentsMargins(5, 0, 0, 0);
-layoutDim->addWidget(dimmer,      0, 0);
-layoutDim->addWidget(nDimmer,     1, 0, 2, 1);
-layoutDim->addWidget(dimmerTest,  3, 0);
+layoutDim->addWidget(dimmer,     0, 0);
+layoutDim->addWidget(nDimmer,    1, 0, 2, 1);
+layoutDim->addWidget(dimmerTest, 3, 0);
 
 layoutTxt = new QGridLayout;
 layoutTxt->setSpacing(5);
@@ -1546,16 +1541,6 @@ layoutP->addLayout(layoutTxt,      2, 0, 1, 4);
 PatchTab->setLayout(layoutP);
 
 
-
-
 ///////////////////////////////////////////////////////////////////////////////
-
 setCentralWidget(tabs);
 }
-
-
-
-
-
-
-
