@@ -208,12 +208,12 @@ padALL->setFocusPolicy(Qt::NoFocus);
 padALL->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
 padFULL = new QPushButton;
-padFULL->setText("FULL");
+padFULL->setText(" FULL ");
 padFULL->setFocusPolicy(Qt::NoFocus);
 padFULL->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
 padEnter = new QPushButton;
-padEnter->setText("Enter");
+padEnter->setText(" Enter ");
 padEnter->setFocusPolicy(Qt::NoFocus);
 padEnter->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
@@ -245,7 +245,7 @@ padGrp->setFocusPolicy(Qt::NoFocus);
 padGrp->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
 padGoto = new QBouton("goto");
-padGoto->setText("Goto");
+padGoto->setText(" Goto ");
 padGoto->setFocusPolicy(Qt::NoFocus);
 padGoto->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
@@ -267,7 +267,7 @@ padRec->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 padUpdate = new QBouton("Update");
 padUpdate->setStyleSheet("QPushButton          {background-color:orange; color:white; border-color:orange;}"
                          "QPushButton:disabled {background-color:black; color:grey;}");
-padUpdate->setText("Up\ndate ");
+padUpdate->setText("Up\n date ");
 padUpdate->setFocusPolicy(Qt::NoFocus);
 padUpdate->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
