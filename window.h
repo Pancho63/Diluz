@@ -40,7 +40,7 @@
 #include <QScroller>
 #include <QTabWidget>
 #include <QBoxLayout>
-#include <QDebug>
+//#include <QDebug>
 
 #include "qbouton.h"
 #include "slideh.h"

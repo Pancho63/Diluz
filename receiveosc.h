@@ -22,7 +22,7 @@
 #ifndef RECEIVEOSC_H
 #define RECEIVEOSC_H
 
-#include <QDebug>
+//#include <QDebug>
 #include <QUdpSocket>
 #include "oscpkt.hh"
 #include "window.h"

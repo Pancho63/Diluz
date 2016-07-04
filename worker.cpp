@@ -37,8 +37,11 @@ QString ipAdrr;
 QList<QHostAddress> addr;
 
 
+
 #if defined(Q_OS_ANDROID)
 QString locSettings = "/sdcard/settingsTeleco.ini";
+#elif defined(Q_OS_IOS)
+QString locSettings = QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/Documents/settingsTeleco.ini";
 #else
 QString locSettings ="settingsTeleco.ini";
 #endif
@@ -48,6 +51,7 @@ QString   PORT_NUMin   = settings.value("portin", "7001").toString();
 int       PORT         = PORT_NUMin.toInt();
 QString   ipDlight     = settings.value("ipdl","192.168.1.103").toString();
 QString   PORT_NUMsend = settings.value("portsend", "7000").toString();
+
 
 bool multiCastOn       = false;
 bool nameAndNotContent = true;
@@ -73,6 +77,10 @@ Worker::Worker(QObject *parent) :
     QObject(parent),
     ui(new WindowTeleco)
 {
+    QDir myDir(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/Documents");
+    if (!myDir.exists()) {qDebug()<<myDir.absolutePath();
+        myDir.mkpath(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/Documents");
+    }
 
     ui->showFullScreen();
 
@@ -321,6 +329,8 @@ void Worker::sendOSC(Message msg)
     PacketWriter pw;
     pw.addMessage(msg);
     udpSocketSend->writeDatagram(pw.packetData(), pw.packetSize(), IpSend, PORT_NUMsend.toInt());
+      qDebug()<<IpSend;
+       qDebug()<<PORT_NUMsend;
     }
 
 void Worker::tabindex(int index)
@@ -354,6 +364,7 @@ void Worker::IPTelecoChanged(QString ip)
 
 void Worker::valideIpDlight()
     { ipDlight = ui->iPDLight->text();
+      if (!multiCastOn)   {IpSend = QHostAddress(ipDlight);}
      QSettings settings(locSettings, QSettings::IniFormat);
      settings.setValue("ipdl", ipDlight);
      premiereErreure=true;
@@ -950,6 +961,7 @@ void Worker::setSubValue(int sub, int no)
 
 
 //scene///////////////////////////////////////////////////////////////////////////////
+
 void Worker::seqplus()
 { Message msg("/seq/plus"); msg.pushInt32(1); sendOSC(msg); }
 
@@ -1015,7 +1027,6 @@ void Worker::joystick(int value)
 
 
 //patch///////////////////////////////////////////////////////////////////////////////
-
 
 void Worker::padPatch(int id)
 { QString id2 = QString("/patch/%1").arg(-id-2);
@@ -1182,6 +1193,7 @@ void Worker::scan()
 
 if ((isConnectedToNetwork()) & (!(ipAdrr == "no network")) & (!(ipAdrr == "")))
     {
+
     QStringList eclate = ipAdrr.split(".");
     QString plageIP = (eclate.at(0) + "." + eclate.at(1) + "." + eclate.at(2)+ "." );
 
@@ -1211,12 +1223,13 @@ if (!isConnectedToNetwork())
     addr = QNetworkInterface::allAddresses();
     QStringList addresses;
     foreach (QHostAddress address, QNetworkInterface::allAddresses())
-            {
+            {qDebug()<<address;
             // Filtre les adresses localhost ...
             if(address != QHostAddress::LocalHostIPv6
             && address != QHostAddress::LocalHost
+            && address != QHostAddress::AnyIPv6
             // ... APIPA ...
-            && !address.isInSubnet(QHostAddress::parseSubnet("169.254.0.0/16"))
+           // && !address.isInSubnet(QHostAddress::parseSubnet("169.254.0.0/16"))
             // ... Lien Local IPv6
             && !address.isInSubnet(QHostAddress::parseSubnet("FE80::/64")))
             addresses << address.toString();
