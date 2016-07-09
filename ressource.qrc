@@ -1,5 +1,6 @@
 <RCC>
     <qresource prefix="/">
         <file>MyStyleSheet.css</file>
+        <file>dead.gif</file>
     </qresource>
 </RCC>

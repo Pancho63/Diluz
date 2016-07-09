@@ -77,10 +77,6 @@ Worker::Worker(QObject *parent) :
     QObject(parent),
     ui(new WindowTeleco)
 {
-    QDir myDir(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/Documents");
-    if (!myDir.exists()) {qDebug()<<myDir.absolutePath();
-        myDir.mkpath(QStandardPaths::writableLocation(QStandardPaths::HomeLocation)+"/Documents");
-    }
 
     ui->showFullScreen();
 
@@ -161,6 +157,7 @@ Worker::Worker(QObject *parent) :
 
 //SUBS   
     connect(ui->subnumpage, SIGNAL(currentIndexChanged(int)), this, SLOT(subNumPage(int)));
+    connect(ui->subKill,    SIGNAL(pressed()),                this, SLOT(killSubs()));
 
     connect(ui->Sub01T,          SIGNAL(slideValue(int)),    this, SLOT(sub01(int)));
     connect(ui->Sub02T,          SIGNAL(slideValue(int)),    this, SLOT(sub02(int)));
@@ -329,8 +326,6 @@ void Worker::sendOSC(Message msg)
     PacketWriter pw;
     pw.addMessage(msg);
     udpSocketSend->writeDatagram(pw.packetData(), pw.packetSize(), IpSend, PORT_NUMsend.toInt());
-      qDebug()<<IpSend;
-       qDebug()<<PORT_NUMsend;
     }
 
 void Worker::tabindex(int index)
@@ -449,7 +444,7 @@ void Worker::afficheUpdate()
     { timer2->stop();
     ui->ecrantxt->setText("double Click to Update");
     timer = new QTimer(ui->ecrantxt);
-    timer->setInterval(1000);
+    timer->setInterval(1400);
     connect(timer, SIGNAL(timeout()), this, SLOT(erase()));
     timer->start();
     }
@@ -728,7 +723,7 @@ void Worker::errorIN(int ok)
 void Worker::padInfo(QString info)
     { ui->ecrantxt->setText(info);
       timer = new QTimer(ui->ecrantxt);
-      timer->setInterval(1000);
+      timer->setInterval(1400);
       connect(timer, SIGNAL(timeout()), this, SLOT(erase()));
       timer->start();
      }
@@ -764,6 +759,9 @@ void Worker::endMSlider()
 
 void Worker::subNumPage(int index)
     { Message msg("/sub/page"); msg.pushInt32(index+1); sendOSC(msg); }
+
+void Worker::killSubs()
+    { Message msg("/sub/kill"); msg.pushInt32(1); sendOSC(msg); }
 
 void Worker::sub01(int level)
     {
@@ -934,7 +932,7 @@ void Worker::nameOrContent()
          return;
         }
      if (!nameAndNotContent)
-       { ui->nameOrContent->setText("  Name   ");
+       { ui->nameOrContent->setText("  Name  ");
          ui->nameOrContent->setStyleSheet("QPushButton {background-color:navy; color:white; border-color:navy;font-size: 20pt;}");
          nameAndNotContent=true;
         }
@@ -1143,8 +1141,6 @@ void Worker::nOp()
 
 
 
-
-
 //autre///////////////////////////////////////////////////////////////////////////////
 
 void Worker::startOSC()
@@ -1165,7 +1161,7 @@ if ((isConnectedToNetwork()) & (!(ipAdrr == "no network")) & (!(ipAdrr == "")))
         {
         listener->reStart();
          return;
-}
+        }
 
     else
      thread->start();
@@ -1193,10 +1189,10 @@ void Worker::scan()
 
 if ((isConnectedToNetwork()) & (!(ipAdrr == "no network")) & (!(ipAdrr == "")))
     {
-
-    QStringList eclate = ipAdrr.split(".");
+for (int j=0; j<ui->iPTeleco->count(); j++)
+{   ui->iPTeleco->setCurrentIndex(j);
+    QStringList eclate = ui->iPTeleco->currentText().split(".");
     QString plageIP = (eclate.at(0) + "." + eclate.at(1) + "." + eclate.at(2)+ "." );
-
     for (int i=1; i<257; i++)
          {
          QString i2 = QString::number(i);
@@ -1209,6 +1205,7 @@ if ((isConnectedToNetwork()) & (!(ipAdrr == "no network")) & (!(ipAdrr == "")))
          udpSocketSend->writeDatagram(pw.packetData(), pw.packetSize(), QHostAddress(ip), PORT_NUMsend.toInt());
           }
     }
+    }
 }
 
 void Worker::freshIp()
@@ -1220,22 +1217,22 @@ if (!isConnectedToNetwork())
 
     else
     {
-    addr = QNetworkInterface::allAddresses();
     QStringList addresses;
     foreach (QHostAddress address, QNetworkInterface::allAddresses())
-            {qDebug()<<address;
+            {
             // Filtre les adresses localhost ...
             if(address != QHostAddress::LocalHostIPv6
             && address != QHostAddress::LocalHost
-            && address != QHostAddress::AnyIPv6
             // ... APIPA ...
            // && !address.isInSubnet(QHostAddress::parseSubnet("169.254.0.0/16"))
             // ... Lien Local IPv6
-            && !address.isInSubnet(QHostAddress::parseSubnet("FE80::/64")))
+            && !address.isInSubnet(QHostAddress::parseSubnet("FE80::/64"))
+            && (address.QHostAddress::protocol() == QAbstractSocket::IPv4Protocol))
+
             addresses << address.toString();
             }
   foreach   (QString address, addresses)
-            { ui->iPTeleco->addItem(address);}
+            {ui->iPTeleco->addItem(address);}
 
   ipAdrr = ui->iPTeleco->currentText();}
 }
@@ -1314,7 +1311,7 @@ void Worker::castModeSelect()
 void Worker::answerDlight(QString answer, int)
 {     
     QHostAddress myIP;
-       if(!(myIP.setAddress( answer)))
+       if(!(myIP.setAddress(answer)))
       {
             QMessageBox msgBox;
             msgBox.setText("D::Light sent an invalid  Ip Adress. Try rebooting D::Light OSC server");
@@ -1325,6 +1322,17 @@ void Worker::answerDlight(QString answer, int)
 
      ipDlight=answer;
      ui->iPDLight->setText(answer);
+     QStringList eclate = answer.split(".");
+     QString plageIPDLight = (eclate.at(0) + "." + eclate.at(1) + "." + eclate.at(2)+ "." );
+     for (int j=0; j<ui->iPTeleco->count(); j++)
+     {ui->iPTeleco->setCurrentIndex(j);
+         QStringList eclateLuz = ui->iPTeleco->currentText().split(".");
+         QString plageIPDLuz = (eclateLuz.at(0) + "." + eclateLuz.at(1) + "." + eclateLuz.at(2)+ "." );
+     if (plageIPDLight==plageIPDLuz){break;}
+    }
+
+
+
      startOSC();
      ui->checkConnected->setChecked(true);
      Message msg("/request/init");

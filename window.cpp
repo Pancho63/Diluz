@@ -45,7 +45,9 @@ SUBsTab =  tabs->widget(2);
 SceneTab = tabs->widget(3);
 PatchTab = tabs->widget(4);
 
-
+#if defined(Q_OS_ANDROID)
+    tabs->setFixedSize(screenWidth, screenHeight);
+#endif
 
 
 //// OSC ////////////////////////////////////////////////////////////////////////////////////
@@ -424,7 +426,7 @@ masterSceneT->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 masterScene = new QProgressBar(masterSceneT);
 masterScene->setMaximum(255);
 masterScene->setValue(255);
-masterScene->setTextVisible(false);
+//masterScene->setTextVisible(false);
 masterScene->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 masterScene->setOrientation(Qt::Horizontal);
 masterScene->setStyleSheet("QProgressBar                 {border: 1px outset darkred;} "
@@ -437,7 +439,7 @@ mastSc->addWidget(masterScene);
 
 textMasterScene = new QLabel(masterScene);
 textMasterScene->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
-textMasterScene->setText("MASTER SCENE");
+textMasterScene->setText("       SCENE  ");
 textMasterScene->setStyleSheet("QLabel:disabled { color:grey }");
 
 QVBoxLayout *mastScTxt = new QVBoxLayout(masterScene);
@@ -453,7 +455,7 @@ masterSubsT->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 masterSubs = new QProgressBar(masterSubsT);
 masterSubs->setMaximum(255);
 masterSubs->setValue(255);
-masterSubs->setTextVisible(false);
+//masterSubs->setTextVisible(false);
 masterSubs->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 masterSubs->setOrientation(Qt::Horizontal);
 masterSubs->setStyleSheet("QProgressBar                 {border: 1px outset darkblue;} "
@@ -466,7 +468,7 @@ mastSu->addWidget(masterSubs);
 
 textMasterSubs = new QLabel(masterSubs);
 textMasterSubs->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
-textMasterSubs->setText("MASTER SUBS");
+textMasterSubs->setText("   ALL SUBS");
 textMasterSubs->setStyleSheet("QLabel:disabled { color:grey }");
 
 QVBoxLayout *mastSuTxt = new QVBoxLayout(masterSubs);
@@ -543,8 +545,13 @@ subnumpageLabel->setStyleSheet("QLabel { background: lightblue; color: black;}")
 subnumpageLabel->setFixedWidth(screenWidth/10);
 subnumpageLabel->setFixedHeight(screenHeight/16);
 
+subKill  = new QPushButton;
+subKill->setMaximumHeight(screenHeight/16);
+subKill->setFocusPolicy(Qt::NoFocus);
+subKill->setStyleSheet("QPushButton {border-image: url(:/dead.gif);}");
+
 nameOrContent = new QPushButton;
-nameOrContent->setText("  Name   ");
+nameOrContent->setText("  Name  ");
 nameOrContent->setStyleSheet("QPushButton { background-color:navy; color:white; border-color:navy;font-size: 20pt;}");
 nameOrContent->setFocusPolicy(Qt::NoFocus);
 nameOrContent->setMaximumHeight(screenHeight/16);
@@ -1026,6 +1033,8 @@ layoutTitre->addWidget(masterpageplus);
 layoutTitre->addWidget(page);
 layoutTitre->addWidget(subnumpage);
 layoutTitre->addStretch(1);
+layoutTitre->addWidget(subKill);
+layoutTitre->addSpacing(5);
 layoutTitre->addWidget(nameOrContent);
 
 

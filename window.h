@@ -134,6 +134,7 @@ public:
     QLabel *subnumpageLabel;
     QLineEdit *nomPageSub;
     QPushButton *nameOrContent;
+    QPushButton *subKill;
     QPushButton *masterpagemoins;
     QPushButton *masterpageplus;
     QLineEdit  *subnum1;

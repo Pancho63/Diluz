@@ -116,6 +116,7 @@ private slots :
     void endMSlider();
 
 //SUBS
+    void killSubs();
     void subNumPage(int);
     void sub01(int);
     void sub02(int);
