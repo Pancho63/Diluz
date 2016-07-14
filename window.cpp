@@ -49,6 +49,12 @@ PatchTab = tabs->widget(4);
     tabs->setFixedSize(screenWidth, screenHeight);
 #endif
 
+    if (screenWidth>screenHeight)
+    {
+        int tempWidth=screenWidth;
+        screenWidth=screenHeight;
+        screenHeight=tempWidth;
+    }
 
 //// OSC ////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
@@ -782,12 +788,13 @@ Sub01T = new SlideH;
 Sub01T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub01T->setEnabled(true);
 Sub01T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub01 = new QSlider(Sub01T);
+Sub01 = new QProgressBar(Sub01T);
 Sub01->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub01->setMaximum(255);
 Sub01->setOrientation(Qt::Horizontal);
-Sub01->setEnabled(false);
-Sub01->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
+//Sub01->setEnabled(false);
+Sub01->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub01txt = new QLabel(Sub01);
 Sub01txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub01txt->setText("                                   ");
@@ -797,12 +804,13 @@ Sub02T = new SlideH;
 Sub02T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub02T->setEnabled(true);
 Sub02T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub02 = new QSlider(Sub02T);
+Sub02 = new QProgressBar(Sub02T);
 Sub02->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub02->setMaximum(255);
 Sub02->setOrientation(Qt::Horizontal);
-Sub02->setEnabled(false);
-Sub02->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
+//Sub02->setEnabled(false);
+Sub02->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub02txt = new QLabel(Sub02);
 Sub02txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub02txt->setText("                                   ");
@@ -812,12 +820,13 @@ Sub03T = new SlideH;
 Sub03T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub03T->setEnabled(true);
 Sub03T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub03 = new QSlider(Sub03T);
+Sub03 = new QProgressBar(Sub03T);
 Sub03->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub03->setMaximum(255);
 Sub03->setOrientation(Qt::Horizontal);
-Sub03->setEnabled(false);
-Sub03->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
+//Sub03->setEnabled(false);
+Sub03->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub03txt = new QLabel(Sub03);
 Sub03txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub03txt->setText("                                   ");
@@ -827,12 +836,13 @@ Sub04T = new SlideH;
 Sub04T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub04T->setEnabled(true);
 Sub04T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub04 = new QSlider(Sub04T);
+Sub04 = new QProgressBar(Sub04T);
 Sub04->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub04->setMaximum(255);
 Sub04->setOrientation(Qt::Horizontal);
-Sub04->setEnabled(false);
-Sub04->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
+//Sub04->setEnabled(false);
+Sub04->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub04txt = new QLabel(Sub04);
 Sub04txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub04txt->setText("                                   ");
@@ -842,12 +852,13 @@ Sub05T = new SlideH;
 Sub05T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub05T->setEnabled(true);
 Sub05T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub05 = new QSlider(Sub05T);
+Sub05 = new QProgressBar(Sub05T);
 Sub05->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub05->setMaximum(255);
 Sub05->setOrientation(Qt::Horizontal);
-Sub05->setEnabled(false);
-Sub05->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
+//Sub05->setEnabled(false);
+Sub05->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub05txt = new QLabel(Sub05);
 Sub05txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub05txt->setText("                                   ");
@@ -857,12 +868,13 @@ Sub06T = new SlideH;
 Sub06T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub06T->setEnabled(true);
 Sub06T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub06 = new QSlider(Sub06T);
+Sub06 = new QProgressBar(Sub06T);
 Sub06->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub06->setMaximum(255);
 Sub06->setOrientation(Qt::Horizontal);
-Sub06->setEnabled(false);
-Sub06->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
+//Sub06->setEnabled(false);
+Sub06->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub06txt = new QLabel(Sub06);
 Sub06txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub06txt->setText("                                   ");
@@ -872,12 +884,13 @@ Sub07T = new SlideH;
 Sub07T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub07T->setEnabled(true);
 Sub07T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub07 = new QSlider(Sub07T);
+Sub07 = new QProgressBar(Sub07T);
 Sub07->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub07->setMaximum(255);
 Sub07->setOrientation(Qt::Horizontal);
-Sub07->setEnabled(false);
-Sub07->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
+//Sub07->setEnabled(false);
+Sub07->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub07txt = new QLabel(Sub07);
 Sub07txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub07txt->setText("                                   ");
@@ -887,12 +900,13 @@ Sub08T = new SlideH;
 Sub08T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub08T->setEnabled(true);
 Sub08T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub08 = new QSlider(Sub08T);
+Sub08 = new QProgressBar(Sub08T);
 Sub08->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub08->setMaximum(255);
 Sub08->setOrientation(Qt::Horizontal);
-Sub08->setEnabled(false);
-Sub08->setStyleSheet(" QSlider::sub-page:disabled {background: navy;}");
+//Sub08->setEnabled(false);
+Sub08->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub08txt = new QLabel(Sub08);
 Sub08txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub08txt->setText("                                   ");
@@ -902,12 +916,13 @@ Sub09T = new SlideH;
 Sub09T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub09T->setEnabled(true);
 Sub09T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub09 = new QSlider(Sub09T);
+Sub09 = new QProgressBar(Sub09T);
 Sub09->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub09->setMaximum(255);
 Sub09->setOrientation(Qt::Horizontal);
-Sub09->setEnabled(false);
-Sub09->setStyleSheet(" QSlider::sub-page:disabled{background: navy;}");
+//Sub09->setEnabled(false);
+Sub09->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub09txt = new QLabel(Sub09);
 Sub09txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub09txt->setText("                                   ");
@@ -917,12 +932,13 @@ Sub10T = new SlideH;
 Sub10T->setAttribute(Qt::WA_AcceptTouchEvents);
 Sub10T->setEnabled(true);
 Sub10T->setStyleSheet("QFrame {border :0px outset transparent}");
-Sub10 = new QSlider(Sub10T);
+Sub10 = new QProgressBar(Sub10T);
 Sub10->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
 Sub10->setMaximum(255);
 Sub10->setOrientation(Qt::Horizontal);
-Sub10->setEnabled(false);
-Sub10->setStyleSheet(" QSlider::sub-page:disabled{background: navy;}");
+//Sub10->setEnabled(false);
+Sub10->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
+                     "QProgressBar::chunk   {background: navy;}");
 Sub10txt = new QLabel(Sub10);
 Sub10txt->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 Sub10txt->setText("                                   ");
@@ -990,7 +1006,7 @@ QVBoxLayout *sub10Laytxt = new QVBoxLayout(Sub10);
 sub10Laytxt->setContentsMargins(0,0,0,0);
 sub10Laytxt->addWidget(Sub10txt);
 
-subsList = new QList<QSlider*>;
+subsList = new QList<QProgressBar*>;
 subsList->append(Sub01);
 subsList->append(Sub02);
 subsList->append(Sub03);
@@ -1190,25 +1206,25 @@ QLabel *labelStep = new QLabel;
 labelStep->setText("Step");
 labelStep->setFixedWidth((screenWidth/7.5)-5);
 labelStep->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-labelStep->setStyleSheet("QLabel{font-size:13pt;}");
+labelStep->setStyleSheet("QLabel{font-size:12pt;}");
 
 QLabel *labelCue = new QLabel;
 labelCue->setText("Cue");
 labelCue->setFixedWidth((screenWidth/7.5)+5);
 labelCue->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
-labelCue->setStyleSheet("QLabel{font-size:13pt;}");
+labelCue->setStyleSheet("QLabel{font-size:12pt;}");
 
 nStepX1 = new QLineEdit;
 nStepX1->setFixedWidth((screenWidth/7.5)-5);
 nStepX1->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
 nStepX1->setReadOnly(true);
-nStepX1->setStyleSheet("QLineEdit {color : red; border-color : red;}");
+nStepX1->setStyleSheet("QLineEdit {color : red; border-color : red;font-size:13pt;}");
 
 nCueX1 = new QLineEdit;
 nCueX1->setFixedWidth((screenWidth/7.5)+10);
 nCueX1->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
 nCueX1->setReadOnly(true);
-nCueX1->setStyleSheet("QLineEdit {color : red; border-color : red;font-size:14pt;}");
+nCueX1->setStyleSheet("QLineEdit {color : red; border-color : red;font-size:13pt;}");
 
 textStepX1 = new QTextEdit;
 textStepX1->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
@@ -1220,13 +1236,13 @@ nStepX2 = new QLineEdit;
 nStepX2->setFixedWidth((screenWidth/7.5)-5);
 nStepX2->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
 nStepX2->setReadOnly(true);
-nStepX2->setStyleSheet("QLineEdit {color : green; border-color : green;}");
+nStepX2->setStyleSheet("QLineEdit {color : green; border-color : green;font-size:13pt;}");
 
 nCueX2 = new QLineEdit;
 nCueX2->setFixedWidth((screenWidth/7.5)+10);
 nCueX2->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
 nCueX2->setReadOnly(true);
-nCueX2->setStyleSheet("QLineEdit {color : green; border-color : green;font-size:14pt;}");
+nCueX2->setStyleSheet("QLineEdit {color : green; border-color : green;font-size:13pt;}");
 
 textStepX2 = new QTextEdit;
 textStepX2->setAlignment(Qt::AlignBottom|Qt::AlignHCenter);
@@ -1260,7 +1276,7 @@ joystickLevel->setAlignment(Qt::AlignTop|Qt::AlignHCenter);
 
 QLabel *textJoystick = new QLabel(joystick);
 textJoystick->setText("J\nO\nY\nS\nT\nI\nC\nK");
-textJoystick->setStyleSheet("QLabel {color:white; font : bold;font-size:14pt}");
+textJoystick->setStyleSheet("QLabel {color:white; font : bold;font-size:13pt}");
 textJoystick->setAlignment(Qt::AlignCenter|Qt::AlignHCenter);
 
 QVBoxLayout *joy = new QVBoxLayout(joystick);
@@ -1270,13 +1286,14 @@ joy->addWidget(textJoystick);
 
 layoutGo = new QVBoxLayout;
 layoutGo->addStretch(1);
-layoutGo->setSpacing(5);
+layoutGo->setSpacing(10);
 layoutGo->addWidget(Pause);
 layoutGo->addWidget(GoBack);
 layoutGo->addWidget(GO);
 layoutGo->addStretch(1);
 
 layoutSeq = new QGridLayout;
+layoutSeq->setSpacing(5);
 layoutSeq->addWidget(stepMoins, 0, 0, 1, 2);
 layoutSeq->addWidget(nStepX1,   1, 0);
 layoutSeq->addWidget(nCueX1,    1, 1);
@@ -1287,7 +1304,7 @@ layoutSeq->addWidget(nCueX2,    3, 1);
 layoutSeq->addWidget(stepPlus,  4, 0, 1, 2);
 
 layoutS = new QGridLayout;
-layoutS->setSpacing(15);
+layoutS->setSpacing(10);
 layoutS->addWidget(textStepX1, 0, 0, 1, 3);
 layoutS->addLayout(layoutGo,   0, 3);
 layoutS->addLayout(layoutSeq,  1, 0);

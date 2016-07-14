@@ -50,7 +50,8 @@
 class WindowTeleco : public QMainWindow
 {
     Q_OBJECT
-
+signals:
+    void paysage(Qt::ScreenOrientation);
 public:
     WindowTeleco(QWidget *parent = 0);
 
@@ -157,16 +158,16 @@ public:
     multiPushButton *Flash08;
     multiPushButton *Flash09;
     multiPushButton *Flash10;
-    QSlider *Sub01;
-    QSlider *Sub02;
-    QSlider *Sub03;
-    QSlider *Sub04;
-    QSlider *Sub05;
-    QSlider *Sub06;
-    QSlider *Sub07;
-    QSlider *Sub08;
-    QSlider *Sub09;
-    QSlider *Sub10;
+    QProgressBar *Sub01;
+    QProgressBar *Sub02;
+    QProgressBar *Sub03;
+    QProgressBar *Sub04;
+    QProgressBar *Sub05;
+    QProgressBar *Sub06;
+    QProgressBar *Sub07;
+    QProgressBar *Sub08;
+    QProgressBar *Sub09;
+    QProgressBar *Sub10;
     SlideH *Sub01T;
     SlideH *Sub02T;
     SlideH *Sub03T;
@@ -190,7 +191,7 @@ public:
     QList<multiPushButton*> *subsFlashList;
     QList<QLabel*> *subsTextList;
     QList<QLineEdit*> *subsNumList;
-    QList<QSlider*> *subsList;
+    QList<QProgressBar*> *subsList;
     QList<SlideH*> *subsListT;
     QHBoxLayout *layoutTitre;
     QVBoxLayout *layoutSubs1;

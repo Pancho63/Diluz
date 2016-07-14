@@ -89,7 +89,6 @@ Worker::Worker(QObject *parent) :
 
     connect(qApp->primaryScreen(), SIGNAL( primaryOrientationChanged(Qt::ScreenOrientation)), this, SLOT(orientationChnged(Qt::ScreenOrientation)));
 
-
     connect(listener, SIGNAL(workRequested()),   thread, SLOT(start()));
     connect(thread,   SIGNAL(started()),       listener, SLOT(goOSC()));
     connect(listener, SIGNAL(finished()),        thread, SLOT(quit()));
@@ -389,7 +388,8 @@ void Worker::padPoint()
     { Message msg("/pad/dot"); msg.pushInt32(1); sendOSC(msg); }
 
 void Worker::padclear()
-    { Message msg("/pad/clear"); msg.pushInt32(1); sendOSC(msg); }
+    {erase();
+    Message msg("/pad/clear"); msg.pushInt32(1); sendOSC(msg); }
 
 void Worker::paddoubleclear()
     { Message msg("/pad/clearclear"); msg.pushInt32(1); sendOSC(msg); }
@@ -434,23 +434,28 @@ void Worker::padRec()
     { Message msg("/pad/record"); msg.pushInt32(1); sendOSC(msg); }
 
 void Worker::padUpdate()
-    { timer2 = new QTimer(ui->ecrantxt);
+    {timer2 = new QTimer(ui->ecrantxt);
+     timer2->setSingleShot(true);
     timer2->setInterval(300);
     connect(timer2, SIGNAL(timeout()), this, SLOT(afficheUpdate()));
-    timer2->start();
+     timer2->start();
     }
 
 void Worker::afficheUpdate()
-    { timer2->stop();
+    {timer2->stop();
+
     ui->ecrantxt->setText("double Click to Update");
     timer = new QTimer(ui->ecrantxt);
+    timer->setSingleShot(true);
     timer->setInterval(1400);
     connect(timer, SIGNAL(timeout()), this, SLOT(erase()));
     timer->start();
+
     }
 
 void Worker::padDoubleUpdate()
-    { timer2->stop();
+    {
+    if (timer2->isActive()) timer2->stop();
       Message msg("/pad/update"); msg.pushInt32(1); sendOSC(msg);
      }
 
@@ -731,6 +736,7 @@ void Worker::padInfo(QString info)
 void Worker::erase()
     { ui->ecrantxt->setText("");
       if (timer) timer->stop();
+      Message msg("/pad/launch"); msg.pushInt32(1); sendOSC(msg);
      }
 
 void Worker::freescale()
@@ -985,9 +991,9 @@ void Worker::pauseButton(int pause)
 {
     if (pause==0)
             { ui->Pause->setStyleSheet("QPushButton{ background-color : black; border : solid; font-size:15pt;"
-                                           "border: 1px outset white;height: 35px;"
+                                           "border: 1px outset white;height: 30px;"
                                            "border-radius: 5px;}");}
-       else { ui->Pause->setStyleSheet("QPushButton{ background-color: red; border-color: red; font-size:15pt;height: 35px; }");
+       else { ui->Pause->setStyleSheet("QPushButton{ background-color: red; border-color: red; font-size:15pt;height: 30px; }");
     }
 }
 void Worker::goBackButton(int goB)
@@ -995,10 +1001,10 @@ void Worker::goBackButton(int goB)
     switch (goB)
     {
         case 0 :ui->GoBack->setStyleSheet("QPushButton{ background-color : black; border : solid; font-size:13pt;"
-                                                       "border: 1px outset white;height: 35px;"
+                                                       "border: 1px outset white;height: 30px;"
                                                        "border-radius: 5px;}");
         break;
-        case 1 : ui->GoBack->setStyleSheet("QPushButton{ background-color: red; border-color: red; font-size:13pt;height: 35px; }");
+        case 1 : ui->GoBack->setStyleSheet("QPushButton{ background-color: red; border-color: red; font-size:13pt;height: 30px; }");
         break;
     }
 }
@@ -1007,17 +1013,18 @@ void Worker::goButton(int go)
     switch (go)
     {
         case 0 :ui->GO->setStyleSheet("QPushButton{ background-color : black; font-size:15pt;"
-                                                   "border: 1px outset white;height: 35px;"
+                                                   "border: 1px outset white;height: 30px;"
                                                    "border-radius: 5px;}");
         break;
-        case 1 : ui->GO->setStyleSheet("QPushButton{ background-color: red; border-color: red;font-size:15pt;height: 35px; }");
+        case 1 : ui->GO->setStyleSheet("QPushButton{ background-color: red; border-color: red;font-size:15pt;height: 30px; }");
         break;
     }
 }
 
 void Worker::joystick(int value)
-{   value = (255-(qRound(value*2.55)));
-    Message msg("/joystick"); msg.pushInt32(value); sendOSC(msg);
+{
+    int newValue = (255-(qRound(value*2.55)));
+    Message msg("/joystick"); msg.pushInt32(newValue); sendOSC(msg);
 }
 
 
@@ -1374,6 +1381,7 @@ if (orientation==Qt::LandscapeOrientation)
     ui->layoutH->addWidget(ui->masterSceneT, 5, 0, 1, 2);
     ui->layoutH->addWidget(ui->masterSubsT,  6, 0, 1, 2);
 
+    ui->layoutSU->setContentsMargins(0,0,5,0);
     ui->layoutSU->removeItem(ui->layoutTitre);
     ui->layoutSU->removeItem(ui->layoutSub6);
     ui->layoutSU->removeItem(ui->layoutSub7);
@@ -1428,6 +1436,7 @@ if (orientation==Qt::PortraitOrientation)
     ui->layoutH->addWidget(ui->masterSceneT, 4, 0, 1, 3);
     ui->layoutH->addWidget(ui->masterSubsT,  4, 3, 1, 3);
 
+    ui->layoutSU->setContentsMargins(0,0,0,0);
     ui->layoutSU->removeItem(ui->layoutTitre);
     ui->layoutSU->removeItem(ui->layoutSub6);
     ui->layoutSU->removeItem(ui->layoutSub7);
