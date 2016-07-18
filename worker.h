@@ -81,6 +81,8 @@ private slots :
     void padenter();
     void padfull();
     void padall();
+    void padDoubleALL();
+    void sendPadall();
     void padPrev();
     void padNext();
 

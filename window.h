@@ -100,7 +100,7 @@ public:
     QPushButton *padNext;
     QPushButton *padPrev;
     QPushButton *padTHRU;
-    QPushButton *padALL;
+    QBouton *padALL;
     QPushButton *padFULL;
     QPushButton *padEnter;
     QPushButton *padGrp;

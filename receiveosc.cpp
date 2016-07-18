@@ -144,7 +144,7 @@ while (udpSocket->hasPendingDatagrams()) {
                }
 
               if ((msg->match("/seq/master").popInt32(iarg).isOkNoMoreArgs())&(onglet=="home")) {
-              emit mscLvl(iarg);}
+              emit mscLvl(qRound(iarg/2.55));}
 
 
 
@@ -164,7 +164,7 @@ while (udpSocket->hasPendingDatagrams()) {
             emit majNiveauxSelection();}
 
         if (msg->match("/sub/master").popInt32(iarg).isOkNoMoreArgs()) {
-       emit msubLvl(iarg);}
+       emit msubLvl(qRound(iarg/2.55));}
     }
 
     if ((onglet=="subs")&(msg->partialMatch("/sub/")))
@@ -181,7 +181,7 @@ while (udpSocket->hasPendingDatagrams()) {
     if ((onglet=="subs")&(msg->partialMatch("/subStick/")))
     {
              if (msg->match("/subStick/numb").popInt32(iarg).popInt32(iarg2).isOkNoMoreArgs()) {
-               qarg = QString::number(iarg2);
+               qarg = QString::number(qRound(iarg2/2.55));
              emit subNo(qarg, iarg);}
 
 

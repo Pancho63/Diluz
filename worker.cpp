@@ -135,6 +135,7 @@ Worker::Worker(QObject *parent) :
     connect(ui->padEnter,     SIGNAL(clicked()),                  this, SLOT(padenter()));
     connect(ui->padFULL,      SIGNAL(clicked()),                  this, SLOT(padfull()));
     connect(ui->padALL,       SIGNAL(clicked()),                  this, SLOT(padall()));
+    connect(ui->padALL,      SIGNAL(doubleClick()),              this, SLOT(padDoubleALL()));
     connect(ui->padNext,      SIGNAL(clicked()),                  this, SLOT(padNext()));
     connect(ui->padPrev,      SIGNAL(clicked()),                  this, SLOT(padPrev()));
     connect(ui->padSub,       SIGNAL(clicked()),                  this, SLOT(padSub()));
@@ -243,7 +244,7 @@ Worker::Worker(QObject *parent) :
     connect(listener, SIGNAL(answer(QString, int)),        this, SLOT(answerDlight(QString, int)));
     connect(listener, SIGNAL(changeIpDl(QString)), ui->iPDLight, SLOT(setText(QString)));
     connect(listener, SIGNAL(changeIpDl(QString)),         this, SLOT(valideIpDlight()));
-    connect(listener, SIGNAL(gotoMode(QString)),           this, SLOT(gotoMode(QString)));
+
 
 // Home
     connect(listener, SIGNAL(mscLvl(int)),                  ui->masterScene, SLOT(setValue(int)));
@@ -256,6 +257,7 @@ Worker::Worker(QObject *parent) :
     connect(listener, SIGNAL(padInfo(QString)),                        this, SLOT(padInfo(QString)));
     connect(listener, SIGNAL(error(int)),                              this, SLOT(errorIN(int)));
     connect(listener, SIGNAL(majNiveauxSelection()),                   this, SLOT(majNiveauxSelection()));
+    connect(listener, SIGNAL(gotoMode(QString)),           this, SLOT(gotoMode(QString)));
 
 // Substicks
     connect(listener, SIGNAL(subPageText(QString)),    ui->nomPageSub, SLOT(setText(QString)));
@@ -388,8 +390,7 @@ void Worker::padPoint()
     { Message msg("/pad/dot"); msg.pushInt32(1); sendOSC(msg); }
 
 void Worker::padclear()
-    {erase();
-    Message msg("/pad/clear"); msg.pushInt32(1); sendOSC(msg); }
+    { Message msg("/pad/clear"); msg.pushInt32(1); sendOSC(msg); }
 
 void Worker::paddoubleclear()
     { Message msg("/pad/clearclear"); msg.pushInt32(1); sendOSC(msg); }
@@ -415,9 +416,6 @@ void Worker::padenter()
 void Worker::padfull()
     { Message msg("/pad/ff"); msg.pushInt32(1); sendOSC(msg); }
 
-void Worker::padall()
-    { Message msg("/pad/all"); msg.pushInt32(1); sendOSC(msg); }
-
 void Worker::padPrev()
     { Message msg("/pad/prev"); msg.pushInt32(1); sendOSC(msg); }
 
@@ -432,6 +430,21 @@ void Worker::padGrp()
 
 void Worker::padRec()
     { Message msg("/pad/record"); msg.pushInt32(1); sendOSC(msg); }
+
+void Worker::padall()
+{timer2 = new QTimer;
+ timer2->setSingleShot(true);
+timer2->setInterval(400);
+connect(timer2, SIGNAL(timeout()), this, SLOT(sendPadall()));
+ timer2->start();
+}
+void Worker::padDoubleALL()
+    {
+     timer2->stop();
+      Message msg("/pad/inv"); msg.pushInt32(1); sendOSC(msg);
+     }
+void Worker::sendPadall()
+    { Message msg("/pad/all"); msg.pushInt32(1); sendOSC(msg); }
 
 void Worker::padUpdate()
     {timer2 = new QTimer(ui->ecrantxt);
@@ -460,14 +473,15 @@ void Worker::padDoubleUpdate()
      }
 
 void Worker::gotoMode(QString mode)
-    { if (mode == "Cue")  { ui->padGoto->setText("Goto\nCue");  }
-      if (mode == "Step") { ui->padGoto->setText("Goto\nStep"); }
-      if (mode == "ID")   { ui->padGoto->setText("Goto\nstID"); }
+    { if (mode == "Cue")  { ui->padGoto->setText("Goto  \n Cue   ");  }
+      if (mode == "Step") { ui->padGoto->setText("Goto  \n Step  "); }
+      if (mode == "ID")   { ui->padGoto->setText("Goto  \n st.ID  "); }
      }
 
 void Worker::padGoto()
     { ui->padGotoCombo->close();
       timer2 = new QTimer;
+      timer2->setSingleShot(true);
       timer2->setInterval(300);
       connect(timer2, SIGNAL(timeout()), this, SLOT(envoiGoto()));
       timer2->start();
@@ -651,25 +665,25 @@ void Worker::masterSubs(int level)
     {
     if (ui->masterSubs->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/sub/master"); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/sub/master"); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->masterSubs->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/sub/master"); msg.pushInt32(i); sendOSC(msg);
+    if (ui->masterSubs->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/sub/master"); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    Message msg("/sub/master"); msg.pushInt32(level); sendOSC(msg); }
+    Message msg("/sub/master"); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::masterScene(int level)
     {
     if (ui->masterScene->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/seq/master"); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/seq/master"); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->masterScene->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/seq/master"); msg.pushInt32(i); sendOSC(msg);
+    if (ui->masterScene->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/seq/master"); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    Message msg("/seq/master"); msg.pushInt32(level); sendOSC(msg); }
+    Message msg("/seq/master"); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::errorIN(int ok)
   { bool faux = ok;
@@ -773,111 +787,111 @@ void Worker::sub01(int level)
     {
     if (ui->Sub01->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(1); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(1); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub01->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(1); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(1); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub01->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(1); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(1); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::sub02(int level)
     {
     if (ui->Sub02->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(2); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(2); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub02->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(2); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(2); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub02->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(2); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(2); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::sub03(int level)
     {
     if (ui->Sub03->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(3); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(3); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub03->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(3); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(3); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub03->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(3); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(3); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::sub04(int level)
     {
     if (ui->Sub04->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(4); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(4); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub04->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(4); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(4); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub04->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(4); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(4); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::sub05(int level)
     {
     if (ui->Sub05->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(5); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(5); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub05->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(5); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(5); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub05->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(5); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(5); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::sub06(int level)
     {
     if (ui->Sub06->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(6); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(6); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub06->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(6); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(6); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub06->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(6); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(6); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::sub07(int level)
     {
     if (ui->Sub07->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(7); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(7); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub07->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(7); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(7); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub07->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(7); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(7); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::sub08(int level)
     {
     if (ui->Sub08->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(8); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(8); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub08->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(8); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(8); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub08->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(8); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(8); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::sub09(int level)
     {
     if (ui->Sub09->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(9); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(9); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub09->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(9); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(9); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub09->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(9); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(9); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::sub10(int level)
     {
     if (ui->Sub10->value()==0)
         { for (int i=0; i<level;i++)
-        {Message msg("/subStick/level");msg.pushInt32(10); msg.pushInt32(i); sendOSC(msg);
+        {Message msg("/subStick/level");msg.pushInt32(10); msg.pushInt32(2.55*i); sendOSC(msg);
         }}
-    if (ui->Sub10->value()==255)
-        { for (int i=255; i>level;i--)
-        {Message msg("/subStick/level");msg.pushInt32(10); msg.pushInt32(254); sendOSC(msg);
-        }} Message msg("/subStick/level");msg.pushInt32(10); msg.pushInt32(level); sendOSC(msg); }
+    if (ui->Sub10->value()==100)
+        { for (int i=100; i>level;i--)
+        {Message msg("/subStick/level");msg.pushInt32(10); msg.pushInt32(2.55*i); sendOSC(msg);
+        }} Message msg("/subStick/level");msg.pushInt32(10); msg.pushInt32(2.55*level); sendOSC(msg); }
 
 void Worker::flashOn1()
     { Message msg("/subStick/flash");msg.pushInt32(1); msg.pushInt32(255); sendOSC(msg); }
@@ -959,7 +973,7 @@ void Worker::setSubName(QString sub, int no)
 { ui->subsTextList->at(no-1)->setText(sub);}
 
 void Worker::setSubValue(int sub, int no)
-{ ui->subsList->at(no-1)->setValue(sub);}
+{ ui->subsList->at(no-1)->setValue(qRound(sub/2.55));}
 
 
 
@@ -1358,6 +1372,11 @@ void Worker::supensionEtReveil(Qt::ApplicationState state)
         startOSC();
         scan();
         tabindex(ui->tabs->currentIndex());
+        extern int screenWidth;
+        extern int screenHeight;
+        if (screenWidth>screenHeight)
+        {   orientationChnged(Qt::LandscapeOrientation);
+        }
     }
 }
 

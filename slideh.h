@@ -44,7 +44,7 @@ protected:
                 QMouseEvent *moved = static_cast<QMouseEvent*>(event);
                 int dep;
                 if ((this->width())>(this->height()))
-                dep =(moved->x()*255)/(this->width());
+                dep =(moved->x()*100)/(this->width());
                 else
                 dep =(moved->y()*100)/(this->height());
                 emit slideValue(dep);
@@ -61,7 +61,7 @@ protected:
                  const QTouchEvent::TouchPoint &touchPoint0 = touchPoints.first();
                  int mv;
                  if ((this->width())>(this->height()))
-                 mv =(touchPoint0.lastPos().x()*255)/(this->width());
+                 mv =(touchPoint0.lastPos().x()*100)/(this->width());
                  else
                  mv =(touchPoint0.lastPos().y()*100)/(this->height());
                  emit slideValue(mv);

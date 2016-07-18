@@ -209,7 +209,7 @@ padTHRU->setText("Thru");
 padTHRU->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 padTHRU->setFocusPolicy(Qt::NoFocus);
 
-padALL = new QPushButton;
+padALL = new QBouton("ALL");
 padALL->setText("ALL");
 padALL->setFocusPolicy(Qt::NoFocus);
 padALL->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
@@ -225,7 +225,7 @@ padEnter->setFocusPolicy(Qt::NoFocus);
 padEnter->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
 padClear = new QBouton("Clr");
-padClear->setText("Clr");
+padClear->setText("  Clr  ");
 padClear->setFocusPolicy(Qt::NoFocus);
 padClear->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
@@ -430,8 +430,8 @@ masterSceneT->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
 
 masterScene = new QProgressBar(masterSceneT);
-masterScene->setMaximum(255);
-masterScene->setValue(255);
+masterScene->setMaximum(100);
+masterScene->setValue(100);
 //masterScene->setTextVisible(false);
 masterScene->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 masterScene->setOrientation(Qt::Horizontal);
@@ -459,8 +459,8 @@ masterSubsT->setStyleSheet("QFrame {border :0px outset transparent}");
 masterSubsT->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 
 masterSubs = new QProgressBar(masterSubsT);
-masterSubs->setMaximum(255);
-masterSubs->setValue(255);
+masterSubs->setMaximum(100);
+masterSubs->setValue(100);
 //masterSubs->setTextVisible(false);
 masterSubs->setSizePolicy(QSizePolicy:: Expanding , QSizePolicy::Expanding);
 masterSubs->setOrientation(Qt::Horizontal);
@@ -790,9 +790,9 @@ Sub01T->setEnabled(true);
 Sub01T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub01 = new QProgressBar(Sub01T);
 Sub01->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub01->setMaximum(255);
+Sub01->setMaximum(100);
 Sub01->setOrientation(Qt::Horizontal);
-//Sub01->setEnabled(false);
+//Sub01->setFormat(QString::number(qRound(Sub01->value()/2.55)));
 Sub01->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
                      "QProgressBar::chunk   {background: navy;}");
 Sub01txt = new QLabel(Sub01);
@@ -806,7 +806,7 @@ Sub02T->setEnabled(true);
 Sub02T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub02 = new QProgressBar(Sub02T);
 Sub02->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub02->setMaximum(255);
+Sub02->setMaximum(100);
 Sub02->setOrientation(Qt::Horizontal);
 //Sub02->setEnabled(false);
 Sub02->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
@@ -822,7 +822,7 @@ Sub03T->setEnabled(true);
 Sub03T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub03 = new QProgressBar(Sub03T);
 Sub03->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub03->setMaximum(255);
+Sub03->setMaximum(100);
 Sub03->setOrientation(Qt::Horizontal);
 //Sub03->setEnabled(false);
 Sub03->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
@@ -838,7 +838,7 @@ Sub04T->setEnabled(true);
 Sub04T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub04 = new QProgressBar(Sub04T);
 Sub04->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub04->setMaximum(255);
+Sub04->setMaximum(100);
 Sub04->setOrientation(Qt::Horizontal);
 //Sub04->setEnabled(false);
 Sub04->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
@@ -854,7 +854,7 @@ Sub05T->setEnabled(true);
 Sub05T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub05 = new QProgressBar(Sub05T);
 Sub05->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub05->setMaximum(255);
+Sub05->setMaximum(100);
 Sub05->setOrientation(Qt::Horizontal);
 //Sub05->setEnabled(false);
 Sub05->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
@@ -870,7 +870,7 @@ Sub06T->setEnabled(true);
 Sub06T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub06 = new QProgressBar(Sub06T);
 Sub06->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub06->setMaximum(255);
+Sub06->setMaximum(100);
 Sub06->setOrientation(Qt::Horizontal);
 //Sub06->setEnabled(false);
 Sub06->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
@@ -886,7 +886,7 @@ Sub07T->setEnabled(true);
 Sub07T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub07 = new QProgressBar(Sub07T);
 Sub07->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub07->setMaximum(255);
+Sub07->setMaximum(100);
 Sub07->setOrientation(Qt::Horizontal);
 //Sub07->setEnabled(false);
 Sub07->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
@@ -902,7 +902,7 @@ Sub08T->setEnabled(true);
 Sub08T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub08 = new QProgressBar(Sub08T);
 Sub08->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub08->setMaximum(255);
+Sub08->setMaximum(100);
 Sub08->setOrientation(Qt::Horizontal);
 //Sub08->setEnabled(false);
 Sub08->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
@@ -918,7 +918,7 @@ Sub09T->setEnabled(true);
 Sub09T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub09 = new QProgressBar(Sub09T);
 Sub09->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub09->setMaximum(255);
+Sub09->setMaximum(100);
 Sub09->setOrientation(Qt::Horizontal);
 //Sub09->setEnabled(false);
 Sub09->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
@@ -934,7 +934,7 @@ Sub10T->setEnabled(true);
 Sub10T->setStyleSheet("QFrame {border :0px outset transparent}");
 Sub10 = new QProgressBar(Sub10T);
 Sub10->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
-Sub10->setMaximum(255);
+Sub10->setMaximum(100);
 Sub10->setOrientation(Qt::Horizontal);
 //Sub10->setEnabled(false);
 Sub10->setStyleSheet("QProgressBar          {border: 1px outset navy;}"
