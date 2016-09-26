@@ -181,7 +181,7 @@ while (udpSocket->hasPendingDatagrams()) {
     if ((onglet=="subs")&(msg->partialMatch("/subStick/")))
     {
              if (msg->match("/subStick/numb").popInt32(iarg).popInt32(iarg2).isOkNoMoreArgs()) {
-               qarg = QString::number(qRound(iarg2/2.55));
+               qarg = QString::number(iarg2);
              emit subNo(qarg, iarg);}
 
 

@@ -300,7 +300,7 @@ Worker::Worker(QObject *parent) :
     udpSocketSend = new QUdpSocket(this);
     freshIp();
     startOSC();
-    scan();
+//    scan();
 #endif
 }
 
