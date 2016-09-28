@@ -1370,7 +1370,7 @@ void Worker::supensionEtReveil(Qt::ApplicationState state)
         udpSocketSend = new QUdpSocket(this);
         freshIp();
         startOSC();
-        scan();
+ //       scan();
         tabindex(ui->tabs->currentIndex());
         extern int screenWidth;
         extern int screenHeight;
