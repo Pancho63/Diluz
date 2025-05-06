@@ -1,22 +1,9 @@
 # D::Luz
-OSC Remote for D::Light lighting console (www.getdlight.com)
+OSC late Remote for D::Light lighting console (www.getdlight.com)
 
-D::Luz is available on  the App store for IOS
 
-an APK bundle for Android is available for download here : 
-  http://www.getdlight.com/index.php/downloadfr/category/35-remote
-
-Developer mode must be active on your device
-
-///    ///     ///
-
-D::Luz est disponible sur l'App store pour IOS
-
-un executable APK pour Android est disponible ici : 
-http://www.getdlight.com/index.php/downloadfr/category/35-remote
-
-Le mode developpeur doit être actif sur votre appareil
-
+tout ce qui suis date d'il y a 9 ans....
+aucune idée de ce qui est d'actualité..
 
 
 # Installation sur Android sans passer par l'Android Market ni l'APK disponible sur le site de D::Light
